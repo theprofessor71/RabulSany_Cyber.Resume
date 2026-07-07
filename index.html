@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Rabul Sany — Cyber Security Researcher</title>
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- FontAwesome for Premium Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  /* --- COLOR VARIABLES (LIGHT & DARK THEME) --- */
+  :root{
+    --bg: #F7F8F7;
+    --bg-alt: #EFF2F0;
+    --ink: #12181B;
+    --ink-soft: #4B565C;
+    --slate: #5A6670;
+    --green: #0F7B4C;
+    --green-soft: #E4F1EA;
+    --red: #C0392B;
+    --red-soft: #FBE9E7;
+    --amber: #B9770E;
+    --line: #DDE3E0;
+    --card-bg: #ffffff;
+    --header-bg: rgba(247,248,247,0.88);
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+
+  body.dark-theme {
+    --bg: #0D1117;
+    --bg-alt: #161B22;
+    --ink: #E6EDF3;
+    --ink-soft: #8B949E;
+    --slate: #6E7681;
+    --green: #238636;
+    --green-soft: rgba(35, 134, 54, 0.15);
+    --red: #F85149;
+    --red-soft: rgba(248, 81, 73, 0.15);
+    --amber: #D29922;
+    --line: #30363D;
+    --card-bg: #161B22;
+    --header-bg: rgba(13,17,23,0.88);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  ::selection{background:var(--green);color:#fff;}
+
+  a{color:inherit;text-decoration:none;}
+  .wrap{width: 100%; max-width:920px; margin:0 auto; padding:0 6%;}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{outline:2px solid var(--green);outline-offset:3px;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:var(--header-bg);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  nav{
+    max-width:920px;margin:0 auto;padding:14px 6%;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{
+    font-family:var(--mono);font-weight:700;font-size:15px;letter-spacing:-0.02em;
+    display:flex;align-items:center;gap:8px; white-space: nowrap;
+  }
+  .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;
+    box-shadow:0 0 0 3px var(--green-soft);}
+  
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .navlinks{display:flex;gap:22px;font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);font-weight:500;}
+  .navlinks a{transition:color .15s;}
+  .navlinks a:hover{color:var(--green);}
+  
+  /* Header Buttons */
+  .nav-actions { display: flex; gap: 8px; align-items: center; }
+  .btn-header { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 7px 14px; border-radius: 6px; font-family: var(--mono); font-size: 11.5px; font-weight: 700; transition: all .2s; border: 1px solid transparent; cursor: pointer; }
+  .btn-header.primary { background: var(--green); color: #fff; border-color: var(--green); box-shadow: 0 2px 8px rgba(15,123,76,0.15); }
+  .btn-header.primary:hover { background: #0c633d; border-color: #0c633d; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(15,123,76,0.25); }
+  .btn-header.outline { background: transparent; color: var(--ink); border-color: var(--line); }
+  .btn-header.outline:hover { background: var(--bg-alt); border-color: var(--slate); transform: translateY(-1px); }
+  .theme-btn { padding: 7px 10px; font-size: 14px; }
+
+  /* Hamburger Menu Button */
+  .menu-btn { display: none; background: none; border: none; font-size: 20px; color: var(--ink); cursor: pointer; padding: 4px; }
+
+  /* Responsive Header (Fixes Overlap) */
+  @media (max-width:1024px) {
+    .navlinks {
+      display: none; position: absolute; top: 100%; left: 0; width: 100%;
+      background: var(--header-bg); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line); box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      flex-direction: column; padding: 20px 0; gap: 18px; text-align: center;
+    }
+    .navlinks.show { display: flex; }
+    .menu-btn { display: block; }
+    .nav-right { gap: 10px; }
+  }
+  
+  @media (max-width:480px){
+    .nav-actions { gap: 6px; }
+    .btn-header { padding: 6px 10px; font-size: 11px; }
+    .theme-btn { padding: 6px 8px; font-size: 13px; }
+    .brand-ext { display: none; } /* Shortens brand name on ultra small screens */
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{padding:80px 0 50px;}
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;color:var(--green);
+    letter-spacing:.06em;margin-bottom:16px;display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--green);display:inline-block;}
+  h1{
+    font-family:var(--mono);font-weight:800;font-size:clamp(28px,6vw,54px);
+    letter-spacing:-0.03em;line-height:1.1;color:var(--ink); padding-right: 5%;
+  }
+  h1 .accent{color:var(--green);}
+  
+  .role-line{
+    font-family:var(--sans);font-size:clamp(15.5px,2.5vw,19px);color:var(--ink-soft);
+    margin-top:16px; width: 100%; max-width: 600px; line-height: 1.7; font-weight: 400;
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:50px 0;border-top:1px solid var(--line);}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:20px;}
+  .sec-tag{font-family:var(--mono);font-size:12px;color:var(--green);white-space:nowrap;}
+  .sec-tag::before{content:"$ ";color:var(--slate);}
+  h2{font-family:var(--mono);font-weight:700;font-size:clamp(17px,3vw,22px);letter-spacing:-0.02em;}
+  .sec-rule{flex:1;height:1px;background:var(--line);}
+
+  /* ---------- PROFILE & ULTRA COMPACT STATS ---------- */
+  .profile-text{max-width:760px;color:var(--ink-soft);font-size:14px; margin-bottom:20px; line-height: 1.6;}
+  .profile-text strong{color:var(--ink);font-weight:600;}
+  
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; max-width: 800px; }
+  @media (max-width:640px){.stats-grid{grid-template-columns: repeat(2, 1fr);}}
+  .stat-card { background: var(--card-bg); padding: 10px 6px; border-radius: 6px; text-align: center; border: 1px solid var(--line); transition: .2s; }
+  .stat-card:hover { border-color: var(--green); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(15,123,76,0.06); }
+  .stat-card .num { font-size: 16px; font-weight: 800; font-family: var(--mono); color: var(--green); margin-bottom: 1px; }
+  .stat-card .label { font-size: 9px; color: var(--ink-soft); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+
+  /* ---------- ULTRA COMPACT SERVICES ---------- */
+  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  @media (max-width:760px){.svc-grid{grid-template-columns: 1fr;}}
+  .svc-card { background: var(--bg-alt); border: 1px solid var(--line); padding: 14px 16px; border-radius: 6px; transition: 0.2s; }
+  .svc-card:hover { background: var(--card-bg); border-color: var(--green); box-shadow: 0 4px 10px rgba(15,123,76,0.05); }
+  .svc-icon { font-size: 14px; margin-bottom: 8px; display: inline-block; color: var(--green); }
+  .svc-title { font-weight: 700; font-family: var(--mono); font-size: 12.5px; margin-bottom: 4px; color: var(--ink); }
+  .svc-desc { font-size: 11px; color: var(--ink-soft); line-height: 1.45; }
+
+  /* ---------- SKILLS (DESIGNER ICONS) ---------- */
+  .skill-cat { margin-bottom: 18px; }
+  .skill-cat:last-child { margin-bottom: 0; }
+  .skill-cat h3 { font-family: var(--mono); font-size: 11px; color: var(--slate); margin-bottom: 8px; text-transform: uppercase; letter-spacing: .05em; }
+  .badge-container { display: flex; flex-wrap: wrap; gap: 6px; }
+  
+  .tech-badge { 
+    display: inline-flex; align-items: center; gap: 5px; 
+    background: var(--card-bg); border: 1px solid var(--line); 
+    padding: 5px 10px; border-radius: 4px; 
+    font-family: var(--mono); font-size: 11.5px; font-weight: 500; 
+    color: var(--ink); transition: transform .2s, border-color .2s; 
+  }
+  .tech-badge:hover { transform: translateY(-2px); border-color: var(--green); box-shadow: 0 4px 8px rgba(0,0,0,0.04); }
+  .tech-badge i { font-size: 12px; }
+
+  /* ---------- EXPERIENCE ---------- */
+  .exp-item{
+    display:grid;grid-template-columns:130px 1fr;gap:16px;padding:20px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .exp-item:last-child{border-bottom:none; padding-bottom:0;}
+  .exp-item:first-child{padding-top:0;}
+  @media (max-width:640px){.exp-item{grid-template-columns:1fr;gap:4px;}}
+  .exp-date{font-family:var(--mono);font-size:11.5px;color:var(--slate);}
+  .exp-role{font-weight:600;font-size:14px;margin-bottom:2px;}
+  .exp-org{color:var(--green);font-size:12px;font-family:var(--mono);margin-bottom:10px;}
+  .exp-item ul{padding-left:16px;color:var(--ink-soft);font-size:13px;}
+  .exp-item li{margin-bottom:8px; line-height: 1.5;}
+
+  /* ---------- HORIZONTAL SLIDERS (PROJECTS & BLOGS) ---------- */
+  .horizontal-slider {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 14px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--green) var(--line);
+  }
+  .horizontal-slider::-webkit-scrollbar { height: 4px; }
+  .horizontal-slider::-webkit-scrollbar-track { background: var(--line); border-radius: 4px; }
+  .horizontal-slider::-webkit-scrollbar-thumb { background: var(--green); border-radius: 4px; }
+
+  .slider-card {
+    border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px;
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+    display: flex; flex-direction: column; transition: 0.2s;
+  }
+  @media(min-width: 768px){ .slider-card{ flex: 0 0 45%; } }
+  
+  .proj-card { background: var(--bg-alt); }
+  .proj-card h3 { font-family: var(--mono); font-size: 13.5px; margin-bottom: 6px; color: var(--ink); }
+  .proj-card p { color: var(--ink-soft); font-size: 12px; margin-bottom: 12px; line-height: 1.5; flex-grow: 1; }
+  .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .proj-tags span { display: inline-flex; align-items: center; gap: 4px; font-family: var(--mono); font-size: 10px; color: var(--green); background: var(--green-soft); padding: 3px 6px; border-radius: 4px; font-weight: 600; }
+  .proj-tags span i { font-size: 11px; }
+
+  .blog-card { background: var(--card-bg); cursor: pointer; }
+  .blog-card:hover { border-color: var(--green); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(15,123,76,0.06); }
+  .blog-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .blog-platform { font-family: var(--mono); font-size: 10px; background: var(--green-soft); color: var(--green); padding: 2px 6px; border-radius: 4px; font-weight: 700; }
+  .blog-date { font-family: var(--mono); font-size: 10.5px; color: var(--slate); }
+  .blog-title { font-weight: 600; font-size: 13.5px; margin-bottom: 12px; color: var(--ink); line-height: 1.45; flex-grow: 1; }
+  .blog-link { margin-top: auto; font-family: var(--mono); font-size: 11px; color: var(--green); font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
+  .blog-link::after { content: "→"; transition: transform .2s; }
+  .blog-card:hover .blog-link::after { transform: translateX(3px); }
+
+  .swipe-hint { text-align: right; margin-top: 8px; font-family: var(--mono); font-size: 10px; color: var(--slate); }
+
+  /* ---------- CERTS ---------- */
+  .cert-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  @media (max-width:640px){.cert-list{grid-template-columns:1fr;}}
+  .cert-item{display:flex;align-items:center;gap:10px;background:var(--card-bg);border:1px solid var(--line);border-radius:6px;padding:10px 12px;}
+  .cert-badge{font-size:16px;color:var(--green);background:var(--green-soft);border-radius:4px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .cert-name{font-weight:600;font-size:12px;}
+  .cert-name a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); transition: color .2s, text-decoration-color .2s; }
+  .cert-name a:hover { color: var(--green); text-decoration-color: var(--green); }
+  .cert-org{font-size:10.5px;color:var(--slate);}
+
+  /* ---------- EDUCATION & TERMINAL ---------- */
+  .edu-card{background:var(--bg-alt);border:1px solid var(--line);border-radius:6px;padding:16px 18px;max-width:600px;}
+  .edu-card .exp-date{margin-bottom:2px;display:block;}
+
+  .term{
+    margin-top:36px;background:#0D1210;border-radius:6px;overflow:hidden;
+    border:1px solid #1c2a24;
+    box-shadow:0 12px 30px -10px rgba(15,123,76,0.25);
+  }
+  .term-bar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:#101915;border-bottom:1px solid #1c2a24;}
+  .term-bar i{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  .term-bar i:nth-child(1){background:#c0392b;}
+  .term-bar i:nth-child(2){background:#b9770e;}
+  .term-bar i:nth-child(3){background:#0f7b4c;}
+  .term-bar span{margin-left:auto;font-family:var(--mono);font-size:10px;color:#5f7268;}
+  .term-body{padding:18px 20px 20px;font-family:var(--mono);font-size:12px;color:#c7d6cd;min-height:150px;}
+  .term-body .prompt{color:#57d99a;}
+  .term-line{opacity:0;animation:fadeIn .4s forwards;white-space:pre-wrap; margin-bottom:4px;}
+  .cursor{display:inline-block;width:6px;height:12px;background:#57d99a;vertical-align:middle;animation:blink 1s steps(1) infinite;margin-left:2px;}
+  @keyframes fadeIn{to{opacity:1;}}
+  @keyframes blink{50%{opacity:0;}}
+  
+  .sev{font-family:var(--mono);font-size:9.5px;font-weight:700;padding:2px 5px;border-radius:3px;letter-spacing:.03em;}
+  .sev-crit{background:rgba(192, 57, 43, 0.15);color:var(--red);}
+  .sev-high{background:rgba(185, 119, 14, 0.15);color:var(--amber);}
+  .sev-info{background:var(--green-soft);color:var(--green);}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  @media (max-width:640px){.contact-grid{grid-template-columns:1fr;}}
+  .contact-item{display:flex;align-items:center;gap:12px;background:var(--card-bg);border:1px solid var(--line);border-radius:6px;padding:12px 14px;transition:border-color .15s, transform .15s;}
+  .contact-item:hover{border-color:var(--green);transform:translateY(-2px);}
+  .contact-icon{width:30px;height:30px;border-radius:4px;background:var(--green-soft);color:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;}
+  .contact-label{font-size:9.5px;color:var(--slate);font-family:var(--mono);}
+  .contact-value{font-weight:600;font-size:12px;word-break:break-word;}
+
+  footer{padding:30px 0 40px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--slate);}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="brand"><span class="dot"></span>rabul<span class="brand-ext">@security</span>:~$</div>
+    
+    <div class="nav-right">
+      <!-- Nav Links (Hidden inside hamburger on mobile) -->
+      <div class="navlinks" id="navMenu">
+        <a href="#profile">profile</a>
+        <a href="#services">services</a>
+        <a href="#skills">skills</a>
+        <a href="#experience">experience</a>
+        <a href="#projects">projects</a>
+        <a href="#blog">writeups</a>
+      </div>
+      
+      <!-- Buttons (Always visible) -->
+      <div class="nav-actions">
+        <!-- Dark Mode Toggle Button -->
+        <button id="themeToggle" class="btn-header outline theme-btn" aria-label="Toggle Dark Mode">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <!-- Replace '#' with your actual resume PDF link -->
+        <a href="#" target="_blank" class="btn-header primary"><i class="fa-solid fa-download"></i> Resume</a>
+        <a href="#contact" class="btn-header outline"><i class="fa-solid fa-paper-plane"></i> Contact</a>
+      </div>
+
+      <!-- Hamburger Icon (Visible only on mobile/tablet) -->
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<div class="wrap hero">
+  <div class="eyebrow">SECURITY RESEARCH &amp; OFFENSIVE TESTING</div>
+  <h1>MD Rabul Sany<br><span class="accent">// Cyber Security Researcher</span></h1>
+  <p class="role-line">Penetration Tester & Bug Bounty Hunter 5+ years experience specializing in web/API vulnerabilities, business logic flaws and Active Directory penetration testing.</p>
+</div>
+
+<section id="profile">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-tag">whoami</span><h2>Profile &amp; Impact</h2><div class="sec-rule"></div></div>
+    <p class="profile-text">
+      Results-driven <strong>Cyber Security Researcher</strong> and <strong>Ethical Hacker</strong> with 5+ years of hands-on experience in Vulnerability Assessment, Web & API Penetration Testing, and Bug Bounty Hunting. Highly active on <strong>HackerOne</strong> and <strong>Intigriti</strong> with a strong track record of identifying critical vulnerabilities and securing digital assets. Holds industry-recognized certifications including <strong>PNPT</strong>, <strong>CHFI</strong>, and <strong>CND</strong>.
+    </p>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="num">1200+</div>
+        <div class="label">Reputation Score</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">15+</div>
+        <div class="label">Hall of Fames</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">50+</div>
+        <div class="label">Bugs Discovered</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">$10k+</div>
+        <div class="label">Bounties Earned</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-tag">cat services.yaml</span><h2>What I Do</h2><div class="sec-rule"></div></div>
+    <div class="svc-grid">
+      <div class="svc-card">
+        <span class="svc-icon"><i class="fa-solid fa-globe"></i></span>
+        <h3 class="svc-title">Web App Pentesting</h3>
+        <p class="svc-desc">Deep diving into business logic flaws, XSS, and complex Access Control bypasses.</p>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon"><i class="fa-solid fa-bolt"></i></span>
+        <h3 class="svc-title">API Security Audit</h3>
+        <p class="svc-desc">Rigorous testing of RESTful APIs, identifying IDORs, auth bypasses, and data leaks.</p>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon"><i class="fa-solid fa-file-code"></i></span>
+        <h3 class="svc-title">Source Code Review</h3>
+        <p class="svc-desc">White-box testing (SAST) of JavaScript to uncover hidden endpoints and secrets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-tag">cat skills.json</span><h2>Core Competencies</h2><div class="sec-rule"></div></div>
+    
+    <div class="skill-cat">
+      <h3>Security Tools</h3>
+      <div class="badge-container">
+        <span class="tech-badge"><i class="fa-solid fa-spider" style="color:#ff6633"></i> Burp Suite Pro</span>
+        <span class="tech-badge"><i class="fa-solid fa-network-wired" style="color:#3498db"></i> Nmap</span>
+        <span class="tech-badge"><i class="fa-solid fa-meteor" style="color:#e74c3c"></i> Metasploit</span>
+        <span class="tech-badge"><i class="fa-solid fa-satellite-dish" style="color:#0F7B4C"></i> Nessus</span>
+        <span class="tech-badge"><i class="fa-solid fa-wifi" style="color:#1abc9c"></i> Wireshark</span>
+        <span class="tech-badge"><i class="fa-solid fa-database" style="color:#9b59b6"></i> SQLmap</span>
+        <span class="tech-badge"><i class="fa-solid fa-magnifying-glass" style="color:#f1c40f"></i> Nuclei</span>
+        <span class="tech-badge"><i class="fa-solid fa-terminal" style="color:#34495e"></i> Ffuf & Subfinder</span>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <h3>Offensive Techniques</h3>
+      <div class="badge-container">
+        <span class="tech-badge"><i class="fa-solid fa-laptop-code" style="color:#e74c3c"></i> Web & API Pentesting</span>
+        <span class="tech-badge"><i class="fa-solid fa-link" style="color:#f39c12"></i> Bug Chaining</span>
+        <span class="tech-badge"><i class="fa-solid fa-shield-halved" style="color:#2ecc71"></i> WAF Evasion</span>
+        <span class="tech-badge"><i class="fa-solid fa-arrow-trend-up" style="color:#34495e"></i> Privilege Escalation</span>
+        <span class="tech-badge"><i class="fa-solid fa-server" style="color:#8e44ad"></i> AD Pentesting</span>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <h3>Programming & Scripting</h3>
+      <div class="badge-container">
+        <span class="tech-badge"><i class="fa-brands fa-python" style="color:#3776ab"></i> Python</span>
+        <span class="tech-badge"><i class="fa-brands fa-linux" style="color:#4eaa25"></i> Bash</span>
+        <span class="tech-badge"><i class="fa-brands fa-js" style="color:#f1e05a"></i> JavaScript</span>
+        <span class="tech-badge"><i class="fa-solid fa-database" style="color:#e38c00"></i> SQL</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-tag">history</span><h2>Professional Experience</h2><div class="sec-rule"></div></div>
+    
+    <div class="exp-item">
+      <div class="exp-date">Oct 2023 —<br>Present</div>
+      <div>
+        <div class="exp-role">Independent Penetration Tester &amp; Security Consultant</div>
+        <div class="exp-org">Global Clients (NDA & Contractual)</div>
+        <ul>
+          <li>Conducted comprehensive Vulnerability Assessments and Penetration Testing (VAPT) for FinTech, E-commerce and Healthcare platforms following OWASP methodologies.</li>
+          <li>Leveraged PNPT skills to perform internal network and Active Directory (AD) audits, successfully simulating real-world APT behaviors to uncover privilege escalation paths.</li>
+          <li>Delivered executive-level risk reports incorporating CVSS v3.1 scoring and collaborated directly with development teams to ensure effective patch remediation.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Jun 2020 —<br>Present</div>
+      <div>
+        <div class="exp-role">Security Researcher &amp; Bug Bounty Hunter</div>
+        <div class="exp-org">HackerOne &amp; Intigriti</div>
+        <ul>
+          <li>Consistently invited to highly confidential, private bug bounty programs due to a high signal-to-noise ratio and strict adherence to NDAs.</li>
+          <li>Specialized in identifying complex Business Logic Flaws and chaining low-severity bugs (e.g., Open Redirect to XSS) to achieve critical impact such as Zero-Click Account Takeover (ATO).</li>
+          <li>Successfully exploited SSRF vulnerabilities in enterprise applications to extract AWS IAM credentials from cloud metadata endpoints.</li>
+          <li>Achieved a reputation score of 1,200+, ranking within the top 10% of researchers on the HackerOne platform by delivering actionable PoCs.</li>
+          <li><em style="font-size: 11.5px; color: var(--slate); font-style: italic;">Note: Bug bounty profile links and specific vulnerability reports are kept private for strict OPSEC reasons. But verified statistics can be provided upon request.</em></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-tag">ls ./projects</span><h2>Projects &amp; CTF Achievements</h2><div class="sec-rule"></div></div>
+    <div class="horizontal-slider">
+      
+      <div class="slider-card proj-card">
+        <h3>Cloud-Based Continuous Reconnaissance Pipeline</h3>
+        <p>Architected a distributed, VPS-based recon framework utilizing Subfinder, HTTPX and custom Nuclei templates. Monitors target attack surfaces 24/7 and automatically alerts on new subdomains, drastically reducing manual discovery time.</p>
+        <div class="proj-tags">
+          <span><i class="fa-solid fa-terminal"></i> Bash</span>
+          <span><i class="fa-solid fa-cloud"></i> VPS/Cloud</span>
+          <span style="color: var(--red); background: var(--red-soft);"><i class="fa-solid fa-lock"></i> NDA Protected</span>
+        </div>
+      </div>
+      
+      <div class="slider-card proj-card">
+        <h3>Custom Vulnerability Scanner & Exploit Modding</h3>
+        <p>Developed tailored Python tools to scan for specific CVEs across large scopes. Regularly analyze and modify public Proof of Concept (PoC) exploits in Go and Python to evade WAFs and fit specific target environments during assessments.</p>
+        <div class="proj-tags">
+          <span><i class="fa-brands fa-python"></i> Python</span>
+          <span><i class="fa-brands fa-golang"></i> Go</span>
+          <span style="color: var(--red); background: var(--red-soft);"><i class="fa-solid fa-lock"></i> NDA Protected</span>
+        </div>
+      </div>
+
+      <div class="slider-card proj-card">
+        <h3>Active Directory Attack &amp; Defense Lab</h3>
+        <p>Built and configured an enterprise-grade AD environment on VMware to practice internal network attacks. Simulated real-world scenarios including Kerberoasting, AS-REP Roasting, LLMNR Poisoning and Pass-the-Hash.</p>
+        <div class="proj-tags">
+          <span><i class="fa-brands fa-windows"></i> Active Directory</span>
+          <span><i class="fa-solid fa-desktop"></i> VMware</span>
+          <span><i class="fa-solid fa-shield-halved"></i> Red Teaming</span>
+        </div>
+      </div>
+
+      <div class="slider-card proj-card">
+        <h3>Automated GraphQL & API Fuzzer Framework</h3>
+        <p>Created a robust automation tool to discover hidden GraphQL Introspection queries and map complex REST API endpoints. Capable of mass-assigning payloads to identify deep Insecure Direct Object References (IDORs).</p>
+        <div class="proj-tags">
+          <span><i class="fa-brands fa-python"></i> Python</span>
+          <span><i class="fa-solid fa-bolt"></i> API Security</span>
+          <span style="color: var(--red); background: var(--red-soft);"><i class="fa-solid fa-lock"></i> NDA Protected</span>
+        </div>
+      </div>
+
+      <div class="slider-card proj-card">
+        <h3>Custom WAF Evasion & Payload Obfuscation Tool</h3>
+        <p>Engineered a specialized Python script to dynamically encode and obfuscate XSS, SSRF and SQLi payloads. Effectively bypassed modern Web Application Firewalls (e.g., Cloudflare, AWS WAF) during black-box penetration testing.</p>
+        <div class="proj-tags">
+          <span><i class="fa-brands fa-python"></i> Python</span>
+          <span><i class="fa-solid fa-shield-halved"></i> WAF Evasion</span>
+          <span style="color: var(--red); background: var(--red-soft);"><i class="fa-solid fa-lock"></i> NDA Protected</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="swipe-hint">
+      <i class="fa-solid fa-arrows-left-right"></i> Swipe horizontally to see more
+    </div>
+  </div>
+</section>
+
+<section id="blog">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-tag">ls ./blog</span><h2>Security Write-ups</h2><div class="sec-rule"></div></div>
+    <div class="horizontal-slider">
+      
+      <a href="#" target="_blank" class="slider-card blog-card">
+        <div class="blog-meta">
+          <span class="blog-platform">Medium</span>
+          <span class="blog-date">Oct 12, 2025</span>
+        </div>
+        <h3 class="blog-title">How I found a Zero-Click ATO via OAuth Misconfiguration in a FinTech App</h3>
+        <span class="blog-link">Read Write-up</span>
+      </a>
+
+      <a href="#" target="_blank" class="slider-card blog-card">
+        <div class="blog-meta">
+          <span class="blog-platform">Personal Blog</span>
+          <span class="blog-date">Aug 28, 2025</span>
+        </div>
+        <h3 class="blog-title">Bypassing Strict WAFs to Achieve Blind SQL Injection on a Private Program</h3>
+        <span class="blog-link">Read Write-up</span>
+      </a>
+
+      <a href="#" target="_blank" class="slider-card blog-card">
+        <div class="blog-meta">
+          <span class="blog-platform">Medium</span>
+          <span class="blog-date">Jan 15, 2026</span>
+        </div>
+        <h3 class="blog-title">Chaining Open Redirect to Stored XSS for Full Account Takeover on E-Commerce</h3>
+        <span class="blog-link">Read Write-up</span>
+      </a>
+
+      <a href="#" target="_blank" class="slider-card blog-card">
+        <div class="blog-meta">
+          <span class="blog-platform">Personal Blog</span>
+          <span class="blog-date">Nov 02, 2025</span>
+        </div>
+        <h3 class="blog-title">Exploiting SSRF in AWS Environments: Extracting IAM Credentials from IMDSv2</h3>
+        <span class="blog-link">Read Write-up</span>
+      </a>
+
+      <a href="#" target="_blank" class="slider-card blog-card">
+        <div class="blog-meta">
+          <span class="blog-platform">InfoSec Writeups</span>
+          <span class="blog-date">Sep 18, 2025</span>
+        </div>
+        <h3 class="blog-title">Uncovering Deep Business Logic Flaws in Payment Gateways: A Hacker's Guide</h3>
+        <span class="blog-link">Read Write-up</span>
+      </a>
+
+    </div>
+    <div class="swipe-hint">
+      <i class="fa-solid fa-arrows-left-right"></i> Swipe horizontally to read more
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-tag">cat certifications.txt</span><h2>Licenses &amp; Certifications</h2><div class="sec-rule"></div></div>
+    <div class="cert-list">
+      <div class="cert-item"><div class="cert-badge"><i class="fa-solid fa-award"></i></div><div><div class="cert-name">Practical Network Penetration Tester</div><div class="cert-org">TCM Security</div></div></div>
+      <div class="cert-item"><div class="cert-badge"><i class="fa-solid fa-certificate"></i></div><div><div class="cert-name"><a href="#" target="_blank">Computer Hacking Forensic Investigator</a></div><div class="cert-org">EC-Council</div></div></div>
+      <div class="cert-item"><div class="cert-badge"><i class="fa-solid fa-shield-halved"></i></div><div><div class="cert-name"><a href="#" target="_blank">Certified Network Defender</a></div><div class="cert-org">EC-Council</div></div></div>
+      <div class="cert-item"><div class="cert-badge"><i class="fa-solid fa-medal"></i></div><div><div class="cert-name"><a href="#" target="_blank">APISec Certified Expert</a></div><div class="cert-org">APISec University</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-tag">cat education.log</span><h2>Education</h2><div class="sec-rule"></div></div>
+    <div class="edu-card">
+      <span class="exp-date">Mar 2019 — Jul 2023</span>
+      <div class="exp-role">Diploma in Engineering</div>
+      <div class="exp-org">Bodiul Alam Science &amp; Technology Institute</div>
+    </div>
+
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><span>recon-scan.sh</span></div>
+      <div class="term-body" id="termBody"></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-tag">cat contact.info</span><h2>Get In Touch</h2><div class="sec-rule"></div></div>
+    <div class="contact-grid">
+      <a class="contact-item" href="mailto:mdrabulsany71@gmail.com">
+        <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+        <div><div class="contact-label">EMAIL</div><div class="contact-value">mdrabulsany71@gmail.com</div></div>
+      </a>
+      <a class="contact-item" href="tel:+8801895202102">
+        <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+        <div><div class="contact-label">PHONE</div><div class="contact-value">+880 1895-202102</div></div>
+      </a>
+      <a class="contact-item" href="https://linkedin.com/in/mdrabulsany" target="_blank" rel="noopener">
+        <div class="contact-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+        <div><div class="contact-label">LINKEDIN</div><div class="contact-value">linkedin.com/in/mdrabulsany</div></div>
+      </a>
+      <a class="contact-item" href="https://github.com/mdrabulsany" target="_blank" rel="noopener">
+        <div class="contact-icon"><i class="fa-brands fa-github"></i></div>
+        <div><div class="contact-label">GITHUB</div><div class="contact-value">github.com/mdrabulsany</div></div>
+      </a>
+      <a class="contact-item" href="https://mdrabulsany.github.io" target="_blank" rel="noopener" style="grid-column:1/-1;">
+        <div class="contact-icon"><i class="fa-solid fa-globe"></i></div>
+        <div><div class="contact-label">BLOG</div><div class="contact-value">mdrabulsany.github.io</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 MD Rabul Sany — All rights reserved. Built for the offense.
+</footer>
+
+<script>
+  // Mobile Hamburger Menu Logic
+  const menuBtn = document.getElementById('menuBtn');
+  const navMenu = document.getElementById('navMenu');
+  const navLinks = document.querySelectorAll('.navlinks a');
+
+  menuBtn.addEventListener('click', () => {
+    navMenu.classList.toggle('show');
+    const icon = menuBtn.querySelector('i');
+    if(navMenu.classList.contains('show')) {
+      icon.classList.remove('fa-bars');
+      icon.classList.add('fa-xmark');
+    } else {
+      icon.classList.remove('fa-xmark');
+      icon.classList.add('fa-bars');
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      navMenu.classList.remove('show');
+      const icon = menuBtn.querySelector('i');
+      icon.classList.remove('fa-xmark');
+      icon.classList.add('fa-bars');
+    });
+  });
+
+  // Dark Mode Toggle Logic
+  const themeToggle = document.getElementById('themeToggle');
+  const body = document.body;
+  const themeIcon = themeToggle.querySelector('i');
+
+  // Check saved theme in local storage
+  if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark-theme');
+    themeIcon.classList.replace('fa-moon', 'fa-sun');
+  }
+
+  themeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-theme');
+    if (body.classList.contains('dark-theme')) {
+      localStorage.setItem('theme', 'dark');
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
+    } else {
+      localStorage.setItem('theme', 'light');
+      themeIcon.classList.replace('fa-sun', 'fa-moon');
+    }
+  });
+
+  // Terminal Animation script
+  const lines = [
+    { t: '<span class="prompt">$</span> subfinder -d target.com -silent | httpx -title -status-code', d: 0 },
+    { t: '[200] https://dev.target.com/api/v1  [API Gateway]', d: 800 },
+    { t: '<span class="prompt">$</span> ffuf -w custom-wordlist.txt -u https://dev.target.com/api/v1/FUZZ', d: 1600 },
+    { t: '[+] /internal/users  <span class="sev sev-crit" style="margin-left:6px;">CRITICAL — IDOR</span>', d: 2400 },
+    { t: '[+] /reset-token     <span class="sev sev-high" style="margin-left:6px;">HIGH — Logic Flaw</span>', d: 3000 },
+    { t: '<span class="prompt">$</span> whoami', d: 3800 },
+    { t: 'MD Rabul Sany — Security Researcher <span class="sev sev-info" style="margin-left:6px;">STATUS: ACTIVE</span>', d: 4400 }
+  ];
+  const el = document.getElementById('termBody');
+  lines.forEach(line => {
+    const div = document.createElement('div');
+    div.className = 'term-line';
+    div.style.animationDelay = line.d + 'ms';
+    div.innerHTML = line.t;
+    el.appendChild(div);
+  });
+  const cursor = document.createElement('span');
+  cursor.className = 'cursor';
+  setTimeout(() => el.appendChild(cursor), 4400);
+</script>
+
+</body>
+</html>
