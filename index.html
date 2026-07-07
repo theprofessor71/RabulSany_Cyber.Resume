@@ -4,141 +4,121 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>Rabul Sany — Cyber Security Researcher</title>
-<!-- Google Fonts -->
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1055/1055685.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<!-- FontAwesome for Premium Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-  /* --- COLOR VARIABLES (LIGHT & DARK THEME) --- */
+  /* --- CUSTOM HACKER CURSOR --- */
+  body { cursor: crosshair; }
+  a, button, .theme-btn, .theme-option, input { cursor: pointer; }
+
+  /* --- COLOR VARIABLES --- */
   :root{
-    --bg: #F7F8F7;
-    --bg-alt: #EFF2F0;
-    --ink: #12181B;
-    --ink-soft: #4B565C;
-    --slate: #5A6670;
-    --green: #0F7B4C;
-    --green-soft: #E4F1EA;
-    --red: #C0392B;
-    --red-soft: #FBE9E7;
-    --amber: #B9770E;
-    --line: #DDE3E0;
-    --card-bg: #ffffff;
-    --header-bg: rgba(247,248,247,0.88);
-    --mono: 'JetBrains Mono', monospace;
-    --sans: 'Inter', sans-serif;
+    --bg: #F7F8F7; --bg-alt: #EFF2F0; --ink: #12181B; --ink-soft: #4B565C;
+    --slate: #5A6670; --green: #0F7B4C; --green-soft: rgba(15, 123, 76, 0.15);
+    --red: #C0392B; --red-soft: rgba(192, 57, 43, 0.15); --amber: #B9770E;
+    --line: #DDE3E0; --card-bg: #ffffff; --header-bg: rgba(247,248,247,0.88);
+    --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
   }
 
   body.dark-theme {
-    --bg: #0D1117;
-    --bg-alt: #161B22;
-    --ink: #E6EDF3;
-    --ink-soft: #8B949E;
-    --slate: #6E7681;
-    --green: #238636;
-    --green-soft: rgba(35, 134, 54, 0.15);
-    --red: #F85149;
-    --red-soft: rgba(248, 81, 73, 0.15);
-    --amber: #D29922;
-    --line: #30363D;
-    --card-bg: #161B22;
-    --header-bg: rgba(13,17,23,0.88);
+    --bg: #0D1117; --bg-alt: #161B22; --ink: #E6EDF3; --ink-soft: #8B949E;
+    --slate: #6E7681; --green: #238636; --green-soft: rgba(35, 134, 54, 0.15);
+    --red: #F85149; --red-soft: rgba(248, 81, 73, 0.15); --amber: #D29922;
+    --line: #30363D; --card-bg: #161B22; --header-bg: rgba(13,17,23,0.88);
+  }
+
+  body.red-theme {
+    --bg: #0a0000; --bg-alt: #140000; --ink: #ffcccc; --ink-soft: #cc8888;
+    --slate: #884444; --green: #e74c3c; --green-soft: rgba(231, 76, 60, 0.15);
+    --red: #ff3333; --red-soft: rgba(255, 51, 51, 0.15); --amber: #e67e22;
+    --line: #3d0000; --card-bg: #1a0505; --header-bg: rgba(10,0,0,0.88);
+  }
+
+  body.crt-theme {
+    --bg: #000000; --bg-alt: #0a0a0a; --ink: #00ff00; --ink-soft: #00cc00;
+    --slate: #008800; --green: #00ff00; --green-soft: rgba(0, 255, 0, 0.15);
+    --red: #ff0000; --red-soft: rgba(255, 0, 0, 0.15); --amber: #ffff00;
+    --line: #003300; --card-bg: #050505; --header-bg: rgba(0,0,0,0.88);
+    font-family: var(--mono);
+  }
+  body.crt-theme::after {
+    content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 9999; background-size: 100% 2px, 3px 100%; pointer-events: none;
   }
 
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:var(--sans);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    overflow-x: hidden;
+    background:var(--bg); color:var(--ink); font-family:var(--sans);
+    line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x: hidden;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
   ::selection{background:var(--green);color:#fff;}
-
   a{color:inherit;text-decoration:none;}
   .wrap{width: 100%; max-width:920px; margin:0 auto; padding:0 6%;}
 
-  /* focus visibility */
-  a:focus-visible, button:focus-visible{outline:2px solid var(--green);outline-offset:3px;}
+  .scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: var(--green); z-index: 9999; box-shadow: 0 0 8px var(--green); }
 
   /* ---------- NAV ---------- */
-  header{
-    position:sticky;top:0;z-index:50;
-    background:var(--header-bg);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-  }
-  nav{
-    max-width:920px;margin:0 auto;padding:14px 6%;
-    display:flex;align-items:center;justify-content:space-between;
-  }
-  .brand{
-    font-family:var(--mono);font-weight:700;font-size:15px;letter-spacing:-0.02em;
-    display:flex;align-items:center;gap:8px; white-space: nowrap;
-  }
-  .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;
-    box-shadow:0 0 0 3px var(--green-soft);}
+  header{ position:sticky;top:0;z-index:50; background:var(--header-bg); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+  nav{ max-width:920px;margin:0 auto;padding:14px 6%; display:flex;align-items:center;justify-content:space-between; }
+  
+  .brand{ font-family:var(--mono);font-weight:700;font-size:15px;letter-spacing:-0.02em; display:flex;align-items:center;gap:8px; white-space: nowrap; color: var(--ink); transition: 0.3s; }
+  .brand:hover { color: var(--green); text-shadow: 0 0 10px var(--green); }
+  .brand .dot{ width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block; animation: pulse-dot 1.5s infinite; }
+  @keyframes pulse-dot { 0% { box-shadow: 0 0 0 0 var(--green); } 70% { box-shadow: 0 0 0 6px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+  .blink-dollar { animation: cursor-blink 1s step-end infinite; }
+  @keyframes cursor-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
   
   .nav-right { display: flex; align-items: center; gap: 16px; }
   .navlinks{display:flex;gap:22px;font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);font-weight:500;}
-  .navlinks a{transition:color .15s;}
   .navlinks a:hover{color:var(--green);}
   
-  /* Header Buttons */
-  .nav-actions { display: flex; gap: 8px; align-items: center; }
-  .btn-header { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 7px 14px; border-radius: 6px; font-family: var(--mono); font-size: 11.5px; font-weight: 700; transition: all .2s; border: 1px solid transparent; cursor: pointer; }
-  .btn-header.primary { background: var(--green); color: #fff; border-color: var(--green); box-shadow: 0 2px 8px rgba(15,123,76,0.15); }
-  .btn-header.primary:hover { background: #0c633d; border-color: #0c633d; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(15,123,76,0.25); }
+  .nav-actions { display: flex; gap: 8px; align-items: center; position: relative; }
+  .btn-header { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 6px; font-family: var(--mono); font-size: 11.5px; font-weight: 700; border: 1px solid transparent; transition: 0.2s;}
+  .btn-header.primary { background: var(--green); color: #fff; border-color: var(--green); }
+  .btn-header.primary:hover { background: transparent; color: var(--green); }
   .btn-header.outline { background: transparent; color: var(--ink); border-color: var(--line); }
-  .btn-header.outline:hover { background: var(--bg-alt); border-color: var(--slate); transform: translateY(-1px); }
-  .theme-btn { padding: 7px 10px; font-size: 14px; }
+  .btn-header.outline:hover { border-color: var(--green); color: var(--green); }
+  
+  .theme-dropdown { position: absolute; top: 45px; left: 0; background: var(--card-bg); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; display: none; flex-direction: column; width: 140px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+  .theme-dropdown.show { display: flex; }
+  .theme-option { padding: 10px 14px; font-family: var(--mono); font-size: 11.5px; color: var(--ink); border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 8px; transition: 0.2s;}
+  .theme-option:last-child { border-bottom: none; }
+  .theme-option:hover { background: var(--bg-alt); color: var(--green); padding-left: 18px;}
 
-  /* Hamburger Menu Button */
-  .menu-btn { display: none; background: none; border: none; font-size: 20px; color: var(--ink); cursor: pointer; padding: 4px; }
+  .menu-btn { display: none; background: none; border: none; font-size: 20px; color: var(--ink); }
 
-  /* Responsive Header (Fixes Overlap) */
   @media (max-width:1024px) {
-    .navlinks {
-      display: none; position: absolute; top: 100%; left: 0; width: 100%;
-      background: var(--header-bg); backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line); box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-      flex-direction: column; padding: 20px 0; gap: 18px; text-align: center;
-    }
+    .navlinks { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--header-bg); border-bottom: 1px solid var(--line); flex-direction: column; padding: 20px 0; gap: 18px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
     .navlinks.show { display: flex; }
     .menu-btn { display: block; }
-    .nav-right { gap: 10px; }
   }
-  
-  @media (max-width:480px){
-    .nav-actions { gap: 6px; }
-    .btn-header { padding: 6px 10px; font-size: 11px; }
-    .theme-btn { padding: 6px 8px; font-size: 13px; }
-    .brand-ext { display: none; } /* Shortens brand name on ultra small screens */
-  }
+  @media (max-width:480px){ .nav-actions { gap: 6px; } .btn-header { padding: 6px 10px; font-size: 11px; } .brand-ext { display: none; } }
+
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+  .reveal.active { opacity: 1; transform: translateY(0); }
 
   /* ---------- HERO ---------- */
   .hero{padding:80px 0 50px;}
-  .eyebrow{
-    font-family:var(--mono);font-size:12px;color:var(--green);
-    letter-spacing:.06em;margin-bottom:16px;display:flex;align-items:center;gap:10px;
-  }
+  .eyebrow{ font-family:var(--mono);font-size:12px;color:var(--green); letter-spacing:.06em;margin-bottom:16px;display:flex;align-items:center;gap:10px; }
   .eyebrow::before{content:"";width:22px;height:1px;background:var(--green);display:inline-block;}
-  h1{
-    font-family:var(--mono);font-weight:800;font-size:clamp(28px,6vw,54px);
-    letter-spacing:-0.03em;line-height:1.1;color:var(--ink); padding-right: 5%;
-  }
+  h1{ font-family:var(--mono);font-weight:800;font-size:clamp(28px,6vw,54px); letter-spacing:-0.03em;line-height:1.1;color:var(--ink); }
   h1 .accent{color:var(--green);}
   
-  .role-line{
-    font-family:var(--sans);font-size:clamp(15.5px,2.5vw,19px);color:var(--ink-soft);
-    margin-top:16px; width: 100%; max-width: 600px; line-height: 1.7; font-weight: 400;
-  }
+  .glitch-hover { position: relative; display: inline-block; }
+  .glitch-hover::before, .glitch-hover::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; pointer-events: none; }
+  .hero h1:hover .glitch-hover::before { left: 2px; text-shadow: -2px 0 var(--red); animation: glitch-anim-1 0.2s infinite linear alternate-reverse; opacity: 1; }
+  .hero h1:hover .glitch-hover::after { left: -2px; text-shadow: -2px 0 var(--green); animation: glitch-anim-2 0.3s infinite linear alternate-reverse; opacity: 1; }
+  @keyframes glitch-anim-1 { 0% { clip-path: inset(20% 0 80% 0); } 100% { clip-path: inset(60% 0 10% 0); } }
+  @keyframes glitch-anim-2 { 0% { clip-path: inset(10% 0 60% 0); } 100% { clip-path: inset(30% 0 20% 0); } }
 
-  /* ---------- SECTION SHELL ---------- */
+  .role-line{ font-family:var(--sans);font-size:clamp(15.5px,2.5vw,19px);color:var(--ink-soft); margin-top:16px; width: 100%; max-width: 600px; }
+
+  /* ---------- SECTIONS ---------- */
   section{padding:50px 0;border-top:1px solid var(--line);}
   .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:20px;}
   .sec-tag{font-family:var(--mono);font-size:12px;color:var(--green);white-space:nowrap;}
@@ -146,47 +126,34 @@
   h2{font-family:var(--mono);font-weight:700;font-size:clamp(17px,3vw,22px);letter-spacing:-0.02em;}
   .sec-rule{flex:1;height:1px;background:var(--line);}
 
-  /* ---------- PROFILE & ULTRA COMPACT STATS ---------- */
-  .profile-text{max-width:760px;color:var(--ink-soft);font-size:14px; margin-bottom:20px; line-height: 1.6;}
-  .profile-text strong{color:var(--ink);font-weight:600;}
+  .profile-text{max-width:760px;color:var(--ink-soft);font-size:14px; margin-bottom:20px;}
+  .profile-text strong{color:var(--ink);}
   
   .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; max-width: 800px; }
   @media (max-width:640px){.stats-grid{grid-template-columns: repeat(2, 1fr);}}
   .stat-card { background: var(--card-bg); padding: 10px 6px; border-radius: 6px; text-align: center; border: 1px solid var(--line); transition: .2s; }
   .stat-card:hover { border-color: var(--green); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(15,123,76,0.06); }
-  .stat-card .num { font-size: 16px; font-weight: 800; font-family: var(--mono); color: var(--green); margin-bottom: 1px; }
-  .stat-card .label { font-size: 9px; color: var(--ink-soft); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+  .stat-card .num { font-size: 16px; font-weight: 800; font-family: var(--mono); color: var(--green); }
+  .stat-card .label { font-size: 9px; color: var(--ink-soft); font-weight: 700; text-transform: uppercase;}
 
-  /* ---------- ULTRA COMPACT SERVICES ---------- */
   .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
   @media (max-width:760px){.svc-grid{grid-template-columns: 1fr;}}
-  .svc-card { background: var(--bg-alt); border: 1px solid var(--line); padding: 14px 16px; border-radius: 6px; transition: 0.2s; }
+  .svc-card { background: var(--bg-alt); border: 1px solid var(--line); padding: 16px 18px; border-radius: 8px; transition: 0.2s; }
   .svc-card:hover { background: var(--card-bg); border-color: var(--green); box-shadow: 0 4px 10px rgba(15,123,76,0.05); }
-  .svc-icon { font-size: 14px; margin-bottom: 8px; display: inline-block; color: var(--green); }
-  .svc-title { font-weight: 700; font-family: var(--mono); font-size: 12.5px; margin-bottom: 4px; color: var(--ink); }
-  .svc-desc { font-size: 11px; color: var(--ink-soft); line-height: 1.45; }
+  .svc-icon { font-size: 16px; margin-bottom: 10px; display: inline-block; color: var(--green); }
+  .svc-title { font-weight: 700; font-family: var(--mono); font-size: 13.5px; margin-bottom: 6px; color: var(--ink); }
+  .svc-desc { font-size: 12px; color: var(--ink-soft); }
 
-  /* ---------- SKILLS (DESIGNER ICONS) ---------- */
+  /* SKILLS RESTORED */
   .skill-cat { margin-bottom: 18px; }
-  .skill-cat:last-child { margin-bottom: 0; }
-  .skill-cat h3 { font-family: var(--mono); font-size: 11px; color: var(--slate); margin-bottom: 8px; text-transform: uppercase; letter-spacing: .05em; }
+  .skill-cat h3 { font-family: var(--mono); font-size: 11px; color: var(--slate); margin-bottom: 8px; text-transform: uppercase;}
   .badge-container { display: flex; flex-wrap: wrap; gap: 6px; }
-  
-  .tech-badge { 
-    display: inline-flex; align-items: center; gap: 5px; 
-    background: var(--card-bg); border: 1px solid var(--line); 
-    padding: 5px 10px; border-radius: 4px; 
-    font-family: var(--mono); font-size: 11.5px; font-weight: 500; 
-    color: var(--ink); transition: transform .2s, border-color .2s; 
-  }
-  .tech-badge:hover { transform: translateY(-2px); border-color: var(--green); box-shadow: 0 4px 8px rgba(0,0,0,0.04); }
-  .tech-badge i { font-size: 12px; }
+  .tech-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--card-bg); border: 1px solid var(--line); padding: 6px 10px; border-radius: 6px; font-family: var(--mono); font-size: 12px; color: var(--ink); transition: 0.2s;}
+  .tech-badge:hover { transform: translateY(-2px); border-color: var(--green); }
+  .tech-badge i { font-size: 13px; }
 
-  /* ---------- EXPERIENCE ---------- */
-  .exp-item{
-    display:grid;grid-template-columns:130px 1fr;gap:16px;padding:20px 0;
-    border-bottom:1px solid var(--line);
-  }
+  /* EXPERIENCE RESTORED */
+  .exp-item{ display:grid;grid-template-columns:130px 1fr;gap:16px;padding:20px 0; border-bottom:1px solid var(--line); }
   .exp-item:last-child{border-bottom:none; padding-bottom:0;}
   .exp-item:first-child{padding-top:0;}
   @media (max-width:640px){.exp-item{grid-template-columns:1fr;gap:4px;}}
@@ -194,106 +161,102 @@
   .exp-role{font-weight:600;font-size:14px;margin-bottom:2px;}
   .exp-org{color:var(--green);font-size:12px;font-family:var(--mono);margin-bottom:10px;}
   .exp-item ul{padding-left:16px;color:var(--ink-soft);font-size:13px;}
-  .exp-item li{margin-bottom:8px; line-height: 1.5;}
 
-  /* ---------- HORIZONTAL SLIDERS (PROJECTS & BLOGS) ---------- */
-  .horizontal-slider {
-    display: flex;
-    gap: 14px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 14px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--green) var(--line);
-  }
+  /* Horizontal Sliders */
+  .horizontal-slider { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 14px; scrollbar-width: thin; scrollbar-color: var(--green) var(--line); }
   .horizontal-slider::-webkit-scrollbar { height: 4px; }
   .horizontal-slider::-webkit-scrollbar-track { background: var(--line); border-radius: 4px; }
   .horizontal-slider::-webkit-scrollbar-thumb { background: var(--green); border-radius: 4px; }
 
-  .slider-card {
-    border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px;
-    flex: 0 0 85%;
-    scroll-snap-align: start;
-    display: flex; flex-direction: column; transition: 0.2s;
-  }
+  .slider-card { border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; flex: 0 0 85%; scroll-snap-align: start; display: flex; flex-direction: column; transition: 0.2s; }
   @media(min-width: 768px){ .slider-card{ flex: 0 0 45%; } }
   
   .proj-card { background: var(--bg-alt); }
-  .proj-card h3 { font-family: var(--mono); font-size: 13.5px; margin-bottom: 6px; color: var(--ink); }
-  .proj-card p { color: var(--ink-soft); font-size: 12px; margin-bottom: 12px; line-height: 1.5; flex-grow: 1; }
+  .proj-card h3 { font-family: var(--mono); font-size: 14.5px; margin-bottom: 6px; color: var(--ink); }
+  .proj-card p { color: var(--ink-soft); font-size: 13px; flex-grow: 1; margin-bottom: 14px;}
   .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .proj-tags span { display: inline-flex; align-items: center; gap: 4px; font-family: var(--mono); font-size: 10px; color: var(--green); background: var(--green-soft); padding: 3px 6px; border-radius: 4px; font-weight: 600; }
-  .proj-tags span i { font-size: 11px; }
-
-  .blog-card { background: var(--card-bg); cursor: pointer; }
+  .proj-tags span { display: inline-flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 11px; color: var(--green); background: var(--green-soft); padding: 4px 8px; border-radius: 4px; font-weight: 600; }
+  
+  .blog-card { background: var(--card-bg); }
   .blog-card:hover { border-color: var(--green); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(15,123,76,0.06); }
   .blog-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-  .blog-platform { font-family: var(--mono); font-size: 10px; background: var(--green-soft); color: var(--green); padding: 2px 6px; border-radius: 4px; font-weight: 700; }
-  .blog-date { font-family: var(--mono); font-size: 10.5px; color: var(--slate); }
-  .blog-title { font-weight: 600; font-size: 13.5px; margin-bottom: 12px; color: var(--ink); line-height: 1.45; flex-grow: 1; }
-  .blog-link { margin-top: auto; font-family: var(--mono); font-size: 11px; color: var(--green); font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
+  .blog-platform { font-family: var(--mono); font-size: 10.5px; background: var(--green-soft); color: var(--green); padding: 3px 8px; border-radius: 4px; font-weight: 700; }
+  .blog-date { font-family: var(--mono); font-size: 11px; color: var(--slate); }
+  .blog-title { font-weight: 600; font-size: 14px; margin-bottom: 14px; color: var(--ink); flex-grow: 1; line-height: 1.4; }
+  .blog-link { margin-top: auto; font-family: var(--mono); font-size: 12px; color: var(--green); font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
   .blog-link::after { content: "→"; transition: transform .2s; }
   .blog-card:hover .blog-link::after { transform: translateX(3px); }
 
-  .swipe-hint { text-align: right; margin-top: 8px; font-family: var(--mono); font-size: 10px; color: var(--slate); }
-
-  /* ---------- CERTS ---------- */
-  .cert-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  .cert-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
   @media (max-width:640px){.cert-list{grid-template-columns:1fr;}}
-  .cert-item{display:flex;align-items:center;gap:10px;background:var(--card-bg);border:1px solid var(--line);border-radius:6px;padding:10px 12px;}
-  .cert-badge{font-size:16px;color:var(--green);background:var(--green-soft);border-radius:4px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-  .cert-name{font-weight:600;font-size:12px;}
-  .cert-name a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); transition: color .2s, text-decoration-color .2s; }
-  .cert-name a:hover { color: var(--green); text-decoration-color: var(--green); }
-  .cert-org{font-size:10.5px;color:var(--slate);}
+  .cert-item{display:flex;align-items:center;gap:12px;background:var(--card-bg);border:1px solid var(--line);border-radius:8px;padding:12px 14px;}
+  .cert-badge{font-size:18px;color:var(--green);background:var(--green-soft);border-radius:6px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;}
+  .cert-name{font-weight:600;font-size:13px;}
+  .cert-name a:hover { color: var(--green); text-decoration: underline; }
 
-  /* ---------- EDUCATION & TERMINAL ---------- */
-  .edu-card{background:var(--bg-alt);border:1px solid var(--line);border-radius:6px;padding:16px 18px;max-width:600px;}
-  .edu-card .exp-date{margin-bottom:2px;display:block;}
+  .edu-card{background:var(--bg-alt);border:1px solid var(--line);border-radius:8px;padding:18px 20px;max-width:600px;}
 
-  .term{
-    margin-top:36px;background:#0D1210;border-radius:6px;overflow:hidden;
-    border:1px solid #1c2a24;
-    box-shadow:0 12px 30px -10px rgba(15,123,76,0.25);
-  }
-  .term-bar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:#101915;border-bottom:1px solid #1c2a24;}
+  /* --- TERMINAL --- */
+  .term{ margin-top:36px;background:#0D1210;border-radius:6px;overflow:hidden; border:1px solid #1c2a24; box-shadow:0 12px 30px -10px rgba(15,123,76,0.25); position: relative; z-index: 10; }
+  .term-bar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:#101915;border-bottom:1px solid #1c2a24; cursor: grab;}
+  .term-bar:active { cursor: grabbing; }
   .term-bar i{width:9px;height:9px;border-radius:50%;display:inline-block;}
-  .term-bar i:nth-child(1){background:#c0392b;}
-  .term-bar i:nth-child(2){background:#b9770e;}
-  .term-bar i:nth-child(3){background:#0f7b4c;}
+  .term-bar i:nth-child(1){background:#c0392b;} .term-bar i:nth-child(2){background:#b9770e;} .term-bar i:nth-child(3){background:#0f7b4c;}
   .term-bar span{margin-left:auto;font-family:var(--mono);font-size:10px;color:#5f7268;}
-  .term-body{padding:18px 20px 20px;font-family:var(--mono);font-size:12px;color:#c7d6cd;min-height:150px;}
-  .term-body .prompt{color:#57d99a;}
-  .term-line{opacity:0;animation:fadeIn .4s forwards;white-space:pre-wrap; margin-bottom:4px;}
-  .cursor{display:inline-block;width:6px;height:12px;background:#57d99a;vertical-align:middle;animation:blink 1s steps(1) infinite;margin-left:2px;}
-  @keyframes fadeIn{to{opacity:1;}}
-  @keyframes blink{50%{opacity:0;}}
-  
-  .sev{font-family:var(--mono);font-size:9.5px;font-weight:700;padding:2px 5px;border-radius:3px;letter-spacing:.03em;}
-  .sev-crit{background:rgba(192, 57, 43, 0.15);color:var(--red);}
-  .sev-high{background:rgba(185, 119, 14, 0.15);color:var(--amber);}
-  .sev-info{background:var(--green-soft);color:var(--green);}
+  .term-body{ padding:18px 20px 20px;font-family:var(--mono);font-size:12px;color:#c7d6cd; height:220px; overflow-y:auto; scroll-behavior: smooth; }
+  .term-body::-webkit-scrollbar { width: 4px; } .term-body::-webkit-scrollbar-thumb { background: var(--green); border-radius: 4px; }
+  .prompt{color:#57d99a; margin-right: 6px;}
+  .term-line{margin-bottom:6px;}
+  .term-input-row { display: none; align-items: center; margin-top: 6px; }
+  #termInput { background: transparent; border: none; color: #c7d6cd; font-family: var(--mono); font-size: 12px; outline: none; flex: 1; caret-color: #57d99a; }
+  .term-response { color: #8B949E; margin-bottom: 10px; margin-top: 4px; line-height: 1.5; }
+  .term-cmd-echo { color: #57d99a; margin-bottom: 2px; }
+  .sev-crit{background:rgba(192, 57, 43, 0.15);color:var(--red); padding:2px 5px;border-radius:3px;font-size:9.5px;font-weight:bold;}
 
-  /* ---------- CONTACT ---------- */
-  .contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  /* --- SECURE SSH DOWNLOAD OVERLAY --- */
+  #sshOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 100000; display: none; align-items: center; justify-content: center; color: #57d99a; font-family: var(--mono); font-size: 14px; }
+
+  /* --- MATRIX CANVAS --- */
+  #matrixCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; display: none; opacity: 0.15; pointer-events: none; }
+
+  /* ---------- CONTACT & FOOTER ---------- */
+  .contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
   @media (max-width:640px){.contact-grid{grid-template-columns:1fr;}}
-  .contact-item{display:flex;align-items:center;gap:12px;background:var(--card-bg);border:1px solid var(--line);border-radius:6px;padding:12px 14px;transition:border-color .15s, transform .15s;}
+  .contact-item{display:flex;align-items:center;gap:12px;background:var(--card-bg);border:1px solid var(--line);border-radius:8px;padding:14px 16px; transition:0.2s;}
   .contact-item:hover{border-color:var(--green);transform:translateY(-2px);}
-  .contact-icon{width:30px;height:30px;border-radius:4px;background:var(--green-soft);color:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;}
-  .contact-label{font-size:9.5px;color:var(--slate);font-family:var(--mono);}
-  .contact-value{font-weight:600;font-size:12px;word-break:break-word;}
+  .contact-icon{width:32px;height:32px;border-radius:6px;background:var(--green-soft);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:14px;}
+  .contact-label{font-size:10.5px;color:var(--slate);font-family:var(--mono);}
+  .contact-value{font-weight:600;font-size:13px; word-break: break-word;}
 
-  footer{padding:30px 0 40px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--slate);}
+  /* Ticker - Adjusted speed and added pause on hover */
+  .cve-ticker-container { width: 100%; background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 8px 0; overflow: hidden; white-space: nowrap; margin-top: 50px; font-family: var(--mono); font-size: 12px; }
+  .cve-ticker-content { display: inline-block; animation: ticker-scroll 150s linear infinite; }
+  .cve-ticker-container:hover .cve-ticker-content { animation-play-state: paused; }
+  .cve-item { margin-right: 40px; color: var(--ink); }
+  .cve-item span { color: var(--red); font-weight: bold; }
+  @keyframes ticker-scroll { 0% { transform: translateX(20%); } 100% { transform: translateX(-100%); } }
+
+  footer{padding:20px 0 40px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--slate);}
+  .base64-msg { font-size: 10px; margin-top: 10px; color: var(--ink-soft); word-break: break-all; max-width: 600px; margin-left: auto; margin-right: auto; opacity: 0.5; transition: 0.3s;}
+  .base64-msg:hover { opacity: 1; color: var(--green); }
 </style>
 </head>
-<body>
+<body id="top">
+
+<canvas id="matrixCanvas"></canvas>
+<div class="scroll-progress" id="progressBar"></div>
+
+<div id="sshOverlay">
+  <div id="sshText"></div>
+</div>
 
 <header>
   <nav>
-    <div class="brand"><span class="dot"></span>rabul<span class="brand-ext">@security</span>:~$</div>
+    <a href="#top" class="brand" title="Back to top">
+      <span class="dot"></span>rabul<span class="brand-ext">@security</span>:~<span class="blink-dollar">$</span>
+    </a>
     
     <div class="nav-right">
-      <!-- Nav Links (Hidden inside hamburger on mobile) -->
       <div class="navlinks" id="navMenu">
         <a href="#profile">profile</a>
         <a href="#services">services</a>
@@ -301,20 +264,25 @@
         <a href="#experience">experience</a>
         <a href="#projects">projects</a>
         <a href="#blog">writeups</a>
+        <a href="#certs">certs</a>
+        <a href="#contact">contact</a>
       </div>
       
-      <!-- Buttons (Always visible) -->
       <div class="nav-actions">
-        <!-- Dark Mode Toggle Button -->
-        <button id="themeToggle" class="btn-header outline theme-btn" aria-label="Toggle Dark Mode">
-          <i class="fa-solid fa-moon"></i>
+        <button id="themeToggleBtn" class="btn-header outline theme-btn" aria-label="Themes">
+          <i class="fa-solid fa-palette"></i>
         </button>
-        <!-- Replace '#' with your actual resume PDF link -->
-        <a href="#" target="_blank" class="btn-header primary"><i class="fa-solid fa-download"></i> Resume</a>
+        <div class="theme-dropdown" id="themeDropdown">
+          <div class="theme-option" onclick="setTheme('light')"><i class="fa-solid fa-sun"></i> Light</div>
+          <div class="theme-option" onclick="setTheme('dark')"><i class="fa-solid fa-moon"></i> Dark</div>
+          <div class="theme-option" onclick="setTheme('crt')"><i class="fa-solid fa-tv"></i> CRT Retro</div>
+          <div class="theme-option" style="color:var(--red);" onclick="setTheme('red')"><i class="fa-solid fa-skull"></i> Red Team</div>
+        </div>
+
+        <a href="https://drive.google.com/file/d/1aLHH_31hZYCyEOKIhV3gv5TIUTEapLkS/view?usp=drivesdk" target="_blank" id="resumeBtn" class="btn-header primary"><i class="fa-solid fa-download"></i> Resume</a>
         <a href="#contact" class="btn-header outline"><i class="fa-solid fa-paper-plane"></i> Contact</a>
       </div>
 
-      <!-- Hamburger Icon (Visible only on mobile/tablet) -->
       <button class="menu-btn" id="menuBtn" aria-label="Toggle Menu">
         <i class="fa-solid fa-bars"></i>
       </button>
@@ -322,43 +290,33 @@
   </nav>
 </header>
 
-<div class="wrap hero">
+<div class="wrap hero reveal">
   <div class="eyebrow">SECURITY RESEARCH &amp; OFFENSIVE TESTING</div>
-  <h1>MD Rabul Sany<br><span class="accent">// Cyber Security Researcher</span></h1>
-  <p class="role-line">Penetration Tester & Bug Bounty Hunter 5+ years experience specializing in web/API vulnerabilities, business logic flaws and Active Directory penetration testing.</p>
+  <h1>
+    <span class="glitch-hover" data-text="MD Rabul Sany">MD Rabul Sany</span><br>
+    <span class="accent">// Cyber Security Researcher</span>
+  </h1>
+  <p class="role-line">Penetration Tester & Bug Bounty Hunter — 5+ years experience specializing in web/API vulnerabilities, business logic flaws and Active Directory penetration testing.</p>
 </div>
 
-<section id="profile">
+<section id="profile" class="reveal">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-tag">whoami</span><h2>Profile &amp; Impact</h2><div class="sec-rule"></div></div>
+    <div class="sec-head"><span class="sec-tag">whoami</span><h2 class="scramble">Profile &amp; Impact</h2><div class="sec-rule"></div></div>
     <p class="profile-text">
-      Results-driven <strong>Cyber Security Researcher</strong> and <strong>Ethical Hacker</strong> with 5+ years of hands-on experience in Vulnerability Assessment, Web & API Penetration Testing, and Bug Bounty Hunting. Highly active on <strong>HackerOne</strong> and <strong>Intigriti</strong> with a strong track record of identifying critical vulnerabilities and securing digital assets. Holds industry-recognized certifications including <strong>PNPT</strong>, <strong>CHFI</strong>, and <strong>CND</strong>.
+      Results-driven <strong>Cyber Security Researcher</strong> and <strong>Ethical Hacker</strong> with 5+ years of hands-on experience in Vulnerability Assessment, Web & API Penetration Testing, and Bug Bounty Hunting. Highly active on <strong>HackerOne</strong> and <strong>Intigriti</strong>. Holds industry-recognized certifications including <strong>PNPT</strong>, <strong>CHFI</strong>, and <strong>CND</strong>.
     </p>
-    
     <div class="stats-grid">
-      <div class="stat-card">
-        <div class="num">1200+</div>
-        <div class="label">Reputation Score</div>
-      </div>
-      <div class="stat-card">
-        <div class="num">15+</div>
-        <div class="label">Hall of Fames</div>
-      </div>
-      <div class="stat-card">
-        <div class="num">50+</div>
-        <div class="label">Bugs Discovered</div>
-      </div>
-      <div class="stat-card">
-        <div class="num">$10k+</div>
-        <div class="label">Bounties Earned</div>
-      </div>
+      <div class="stat-card"><div class="num">1200+</div><div class="label">Reputation Score</div></div>
+      <div class="stat-card"><div class="num">15+</div><div class="label">Hall of Fames</div></div>
+      <div class="stat-card"><div class="num">50+</div><div class="label">Bugs Discovered</div></div>
+      <div class="stat-card"><div class="num">$10k+</div><div class="label">Bounties Earned</div></div>
     </div>
   </div>
 </section>
 
-<section id="services">
+<section id="services" class="reveal">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-tag">cat services.yaml</span><h2>What I Do</h2><div class="sec-rule"></div></div>
+    <div class="sec-head"><span class="sec-tag">cat services.yaml</span><h2 class="scramble">What I Do</h2><div class="sec-rule"></div></div>
     <div class="svc-grid">
       <div class="svc-card">
         <span class="svc-icon"><i class="fa-solid fa-globe"></i></span>
@@ -379,10 +337,9 @@
   </div>
 </section>
 
-<section id="skills">
+<section id="skills" class="reveal">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-tag">cat skills.json</span><h2>Core Competencies</h2><div class="sec-rule"></div></div>
-    
+    <div class="sec-head"><span class="sec-tag">cat skills.json</span><h2 class="scramble">Core Competencies</h2><div class="sec-rule"></div></div>
     <div class="skill-cat">
       <h3>Security Tools</h3>
       <div class="badge-container">
@@ -396,7 +353,6 @@
         <span class="tech-badge"><i class="fa-solid fa-terminal" style="color:#34495e"></i> Ffuf & Subfinder</span>
       </div>
     </div>
-
     <div class="skill-cat">
       <h3>Offensive Techniques</h3>
       <div class="badge-container">
@@ -407,7 +363,6 @@
         <span class="tech-badge"><i class="fa-solid fa-server" style="color:#8e44ad"></i> AD Pentesting</span>
       </div>
     </div>
-
     <div class="skill-cat">
       <h3>Programming & Scripting</h3>
       <div class="badge-container">
@@ -417,27 +372,24 @@
         <span class="tech-badge"><i class="fa-solid fa-database" style="color:#e38c00"></i> SQL</span>
       </div>
     </div>
-
   </div>
 </section>
 
-<section id="experience">
+<section id="experience" class="reveal">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-tag">history</span><h2>Professional Experience</h2><div class="sec-rule"></div></div>
-    
+    <div class="sec-head"><span class="sec-tag">history</span><h2 class="scramble">Professional Experience</h2><div class="sec-rule"></div></div>
     <div class="exp-item">
       <div class="exp-date">Oct 2023 —<br>Present</div>
       <div>
         <div class="exp-role">Independent Penetration Tester &amp; Security Consultant</div>
         <div class="exp-org">Global Clients (NDA & Contractual)</div>
         <ul>
-          <li>Conducted comprehensive Vulnerability Assessments and Penetration Testing (VAPT) for FinTech, E-commerce and Healthcare platforms following OWASP methodologies.</li>
+          <li>Conducted comprehensive Vulnerability Assessments and Penetration Testing (VAPT) for FinTech, E-commerce, and Healthcare platforms following OWASP methodologies.</li>
           <li>Leveraged PNPT skills to perform internal network and Active Directory (AD) audits, successfully simulating real-world APT behaviors to uncover privilege escalation paths.</li>
-          <li>Delivered executive-level risk reports incorporating CVSS v3.1 scoring and collaborated directly with development teams to ensure effective patch remediation.</li>
+          <li>Delivered executive-level risk reports incorporating CVSS v3.1 scoring, and collaborated directly with development teams to ensure effective patch remediation.</li>
         </ul>
       </div>
     </div>
-
     <div class="exp-item">
       <div class="exp-date">Jun 2020 —<br>Present</div>
       <div>
@@ -448,164 +400,132 @@
           <li>Specialized in identifying complex Business Logic Flaws and chaining low-severity bugs (e.g., Open Redirect to XSS) to achieve critical impact such as Zero-Click Account Takeover (ATO).</li>
           <li>Successfully exploited SSRF vulnerabilities in enterprise applications to extract AWS IAM credentials from cloud metadata endpoints.</li>
           <li>Achieved a reputation score of 1,200+, ranking within the top 10% of researchers on the HackerOne platform by delivering actionable PoCs.</li>
-          <li><em style="font-size: 11.5px; color: var(--slate); font-style: italic;">Note: Bug bounty profile links and specific vulnerability reports are kept private for strict OPSEC reasons. But verified statistics can be provided upon request.</em></li>
         </ul>
+        <div style="font-size: 11.5px; color: var(--slate); font-style: italic; margin-top: 10px; padding-left: 16px;">Note: Bug bounty profile links and specific vulnerability reports are kept private for strict OPSEC reasons, but verified statistics can be provided upon request.</div>
       </div>
     </div>
-
   </div>
 </section>
 
-<section id="projects">
+<section id="projects" class="reveal">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-tag">ls ./projects</span><h2>Projects &amp; Achievements</h2><div class="sec-rule"></div></div>
+    <div class="sec-head"><span class="sec-tag">ls ./projects</span><h2 class="scramble">Projects &amp; Achievements</h2><div class="sec-rule"></div></div>
     <div class="horizontal-slider">
-      
       <div class="slider-card proj-card">
         <h3>Cloud-Based Continuous Reconnaissance Pipeline</h3>
-        <p>Architected a distributed, VPS-based recon framework utilizing Subfinder, HTTPX and custom Nuclei templates. Monitors target attack surfaces 24/7 and automatically alerts on new subdomains, drastically reducing manual discovery time.</p>
+        <p>Architected a distributed, VPS-based recon framework utilizing Subfinder, HTTPX, and custom Nuclei templates. Monitors target attack surfaces 24/7 and automatically alerts on new subdomains, drastically reducing manual discovery time.</p>
         <div class="proj-tags">
-          <span><i class="fa-solid fa-terminal"></i> Bash</span>
-          <span><i class="fa-solid fa-cloud"></i> VPS/Cloud</span>
+          <span><i class="fa-solid fa-terminal"></i> Bash</span><span><i class="fa-solid fa-cloud"></i> VPS/Cloud</span>
           <span style="color: var(--red); background: var(--red-soft);"><i class="fa-solid fa-lock"></i> NDA Protected</span>
         </div>
       </div>
-      
       <div class="slider-card proj-card">
         <h3>Custom Vulnerability Scanner & Exploit Modding</h3>
         <p>Developed tailored Python tools to scan for specific CVEs across large scopes. Regularly analyze and modify public Proof of Concept (PoC) exploits in Go and Python to evade WAFs and fit specific target environments during assessments.</p>
         <div class="proj-tags">
-          <span><i class="fa-brands fa-python"></i> Python</span>
-          <span><i class="fa-brands fa-golang"></i> Go</span>
+          <span><i class="fa-brands fa-python"></i> Python</span><span><i class="fa-brands fa-golang"></i> Go</span>
           <span style="color: var(--red); background: var(--red-soft);"><i class="fa-solid fa-lock"></i> NDA Protected</span>
         </div>
       </div>
-
       <div class="slider-card proj-card">
         <h3>Active Directory Attack &amp; Defense Lab</h3>
-        <p>Built and configured an enterprise-grade AD environment on VMware to practice internal network attacks. Simulated real-world scenarios including Kerberoasting, AS-REP Roasting, LLMNR Poisoning and Pass-the-Hash.</p>
+        <p>Built and configured an enterprise-grade AD environment on VMware to practice internal network attacks. Simulated real-world scenarios including Kerberoasting, AS-REP Roasting, LLMNR Poisoning, and Pass-the-Hash.</p>
         <div class="proj-tags">
-          <span><i class="fa-brands fa-windows"></i> Active Directory</span>
-          <span><i class="fa-solid fa-desktop"></i> VMware</span>
-          <span><i class="fa-solid fa-shield-halved"></i> Red Teaming</span>
+          <span><i class="fa-brands fa-windows"></i> Active Directory</span><span><i class="fa-solid fa-desktop"></i> VMware</span><span><i class="fa-solid fa-shield-halved"></i> Red Teaming</span>
         </div>
       </div>
-
       <div class="slider-card proj-card">
         <h3>Automated GraphQL & API Fuzzer Framework</h3>
         <p>Created a robust automation tool to discover hidden GraphQL Introspection queries and map complex REST API endpoints. Capable of mass-assigning payloads to identify deep Insecure Direct Object References (IDORs).</p>
         <div class="proj-tags">
-          <span><i class="fa-brands fa-python"></i> Python</span>
-          <span><i class="fa-solid fa-bolt"></i> API Security</span>
+          <span><i class="fa-brands fa-python"></i> Python</span><span><i class="fa-solid fa-bolt"></i> API Security</span>
           <span style="color: var(--red); background: var(--red-soft);"><i class="fa-solid fa-lock"></i> NDA Protected</span>
         </div>
       </div>
-
       <div class="slider-card proj-card">
         <h3>Custom WAF Evasion & Payload Obfuscation Tool</h3>
-        <p>Engineered a specialized Python script to dynamically encode and obfuscate XSS, SSRF and SQLi payloads. Effectively bypassed modern Web Application Firewalls (e.g., Cloudflare, AWS WAF) during black-box penetration testing.</p>
+        <p>Engineered a specialized Python script to dynamically encode and obfuscate XSS, SSRF, and SQLi payloads. Effectively bypassed modern Web Application Firewalls (e.g., Cloudflare, AWS WAF) during black-box penetration testing.</p>
         <div class="proj-tags">
-          <span><i class="fa-brands fa-python"></i> Python</span>
-          <span><i class="fa-solid fa-shield-halved"></i> WAF Evasion</span>
+          <span><i class="fa-brands fa-python"></i> Python</span><span><i class="fa-solid fa-shield-halved"></i> WAF Evasion</span>
           <span style="color: var(--red); background: var(--red-soft);"><i class="fa-solid fa-lock"></i> NDA Protected</span>
         </div>
       </div>
-
     </div>
-    <div class="swipe-hint">
-      <i class="fa-solid fa-arrows-left-right"></i> Swipe horizontally to see more
-    </div>
+    <div class="swipe-hint"><i class="fa-solid fa-arrows-left-right"></i> Swipe horizontally to see more</div>
   </div>
 </section>
 
-<section id="blog">
+<section id="blog" class="reveal">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-tag">ls ./blog</span><h2>Security Write-ups</h2><div class="sec-rule"></div></div>
+    <div class="sec-head"><span class="sec-tag">ls ./blog</span><h2 class="scramble">Security Write-ups</h2><div class="sec-rule"></div></div>
     <div class="horizontal-slider">
-      
-      <a href="#" target="_blank" class="slider-card blog-card">
-        <div class="blog-meta">
-          <span class="blog-platform">Medium</span>
-          <span class="blog-date">Oct 12, 2025</span>
-        </div>
+      <a href="#" class="slider-card blog-card">
+        <div class="blog-meta"><span class="blog-platform">Medium</span><span class="blog-date">Oct 12, 2025</span></div>
         <h3 class="blog-title">How I found a Zero-Click ATO via OAuth Misconfiguration in a FinTech App</h3>
         <span class="blog-link">Read Write-up</span>
       </a>
-
-      <a href="#" target="_blank" class="slider-card blog-card">
-        <div class="blog-meta">
-          <span class="blog-platform">Personal Blog</span>
-          <span class="blog-date">Aug 28, 2025</span>
-        </div>
+      <a href="#" class="slider-card blog-card">
+        <div class="blog-meta"><span class="blog-platform">Personal Blog</span><span class="blog-date">Aug 28, 2025</span></div>
         <h3 class="blog-title">Bypassing Strict WAFs to Achieve Blind SQL Injection on a Private Program</h3>
         <span class="blog-link">Read Write-up</span>
       </a>
-
-      <a href="#" target="_blank" class="slider-card blog-card">
-        <div class="blog-meta">
-          <span class="blog-platform">Medium</span>
-          <span class="blog-date">Jan 15, 2026</span>
-        </div>
+      <a href="#" class="slider-card blog-card">
+        <div class="blog-meta"><span class="blog-platform">Medium</span><span class="blog-date">Jan 15, 2026</span></div>
         <h3 class="blog-title">Chaining Open Redirect to Stored XSS for Full Account Takeover on E-Commerce</h3>
         <span class="blog-link">Read Write-up</span>
       </a>
-
-      <a href="#" target="_blank" class="slider-card blog-card">
-        <div class="blog-meta">
-          <span class="blog-platform">Personal Blog</span>
-          <span class="blog-date">Nov 02, 2025</span>
-        </div>
+      <a href="#" class="slider-card blog-card">
+        <div class="blog-meta"><span class="blog-platform">Personal Blog</span><span class="blog-date">Nov 02, 2025</span></div>
         <h3 class="blog-title">Exploiting SSRF in AWS Environments: Extracting IAM Credentials from IMDSv2</h3>
         <span class="blog-link">Read Write-up</span>
       </a>
-
-      <a href="#" target="_blank" class="slider-card blog-card">
-        <div class="blog-meta">
-          <span class="blog-platform">InfoSec Writeups</span>
-          <span class="blog-date">Sep 18, 2025</span>
-        </div>
+      <a href="#" class="slider-card blog-card">
+        <div class="blog-meta"><span class="blog-platform">InfoSec Writeups</span><span class="blog-date">Sep 18, 2025</span></div>
         <h3 class="blog-title">Uncovering Deep Business Logic Flaws in Payment Gateways: A Hacker's Guide</h3>
         <span class="blog-link">Read Write-up</span>
       </a>
-
     </div>
-    <div class="swipe-hint">
-      <i class="fa-solid fa-arrows-left-right"></i> Swipe horizontally to read more
-    </div>
+    <div class="swipe-hint"><i class="fa-solid fa-arrows-left-right"></i> Swipe horizontally to read more</div>
   </div>
 </section>
 
-<section id="certs">
+<section id="certs" class="reveal">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-tag">cat certifications.txt</span><h2>Licenses &amp; Certifications</h2><div class="sec-rule"></div></div>
+    <div class="sec-head"><span class="sec-tag">cat certifications.txt</span><h2 class="scramble">Licenses &amp; Certifications</h2><div class="sec-rule"></div></div>
     <div class="cert-list">
       <div class="cert-item"><div class="cert-badge"><i class="fa-solid fa-award"></i></div><div><div class="cert-name">Practical Network Penetration Tester</div><div class="cert-org">TCM Security</div></div></div>
-      <div class="cert-item"><div class="cert-badge"><i class="fa-solid fa-certificate"></i></div><div><div class="cert-name"><a href="#" target="_blank">Computer Hacking Forensic Investigator</a></div><div class="cert-org">EC-Council</div></div></div>
-      <div class="cert-item"><div class="cert-badge"><i class="fa-solid fa-shield-halved"></i></div><div><div class="cert-name"><a href="#" target="_blank">Certified Network Defender</a></div><div class="cert-org">EC-Council</div></div></div>
-      <div class="cert-item"><div class="cert-badge"><i class="fa-solid fa-medal"></i></div><div><div class="cert-name"><a href="#" target="_blank">APISec Certified Expert</a></div><div class="cert-org">APISec University</div></div></div>
+      <div class="cert-item"><div class="cert-badge"><i class="fa-solid fa-certificate"></i></div><div><div class="cert-name"><a href="#">Computer Hacking Forensic Investigator</a></div><div class="cert-org">EC-Council</div></div></div>
+      <div class="cert-item"><div class="cert-badge"><i class="fa-solid fa-shield-halved"></i></div><div><div class="cert-name"><a href="#">Certified Network Defender</a></div><div class="cert-org">EC-Council</div></div></div>
+      <div class="cert-item"><div class="cert-badge"><i class="fa-solid fa-medal"></i></div><div><div class="cert-name"><a href="#">APISec Certified Expert</a></div><div class="cert-org">APISec University</div></div></div>
     </div>
   </div>
 </section>
 
-<section id="education">
+<section id="education" class="reveal">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-tag">cat education.log</span><h2>Education</h2><div class="sec-rule"></div></div>
+    <div class="sec-head"><span class="sec-tag">cat education.log</span><h2 class="scramble">Education</h2><div class="sec-rule"></div></div>
     <div class="edu-card">
       <span class="exp-date">Mar 2019 — Jul 2023</span>
       <div class="exp-role">Diploma in Engineering</div>
       <div class="exp-org">Bodiul Alam Science &amp; Technology Institute</div>
     </div>
 
-    <div class="term">
-      <div class="term-bar"><i></i><i></i><i></i><span>recon-scan.sh</span></div>
-      <div class="term-body" id="termBody"></div>
+    <div class="term" id="draggableTerm">
+      <div class="term-bar" id="termHeader" title="Drag me!"><i></i><i></i><i></i><span>recon-terminal.sh</span></div>
+      <div class="term-body" id="termBody">
+        <div id="termOutput"></div>
+        <div class="term-input-row" id="termInputRow">
+          <span class="prompt">guest@rabulsany:~$</span>
+          <input type="text" id="termInput" autocomplete="off" spellcheck="false">
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="contact">
+<section id="contact" class="reveal">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-tag">cat contact.info</span><h2>Get In Touch</h2><div class="sec-rule"></div></div>
+    <div class="sec-head"><span class="sec-tag">cat contact.info</span><h2 class="scramble">Get In Touch</h2><div class="sec-rule"></div></div>
     <div class="contact-grid">
       <a class="contact-item" href="mailto:mdrabulsany71@gmail.com">
         <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
@@ -619,24 +539,81 @@
         <div class="contact-icon"><i class="fa-brands fa-linkedin-in"></i></div>
         <div><div class="contact-label">LINKEDIN</div><div class="contact-value">linkedin.com/in/mdrabulsany</div></div>
       </a>
-      <a class="contact-item" href="https://github.com/mdrabulsany" target="_blank" rel="noopener">
+      <a class="contact-item" href="https://github.com/theprofessor71" target="_blank" rel="noopener">
         <div class="contact-icon"><i class="fa-brands fa-github"></i></div>
-        <div><div class="contact-label">GITHUB</div><div class="contact-value">github.com/mdrabulsany</div></div>
+        <div><div class="contact-label">GITHUB</div><div class="contact-value">github.com/theprofessor71</div></div>
       </a>
-      <a class="contact-item" href="https://mdrabulsany.github.io" target="_blank" rel="noopener" style="grid-column:1/-1;">
+      <a class="contact-item" href="https://rabulsany.pro.bd" target="_blank" rel="noopener" style="grid-column:1/-1;">
         <div class="contact-icon"><i class="fa-solid fa-globe"></i></div>
-        <div><div class="contact-label">BLOG</div><div class="contact-value">mdrabulsany.github.io</div></div>
+        <div><div class="contact-label">PORTFOLIO / BLOG</div><div class="contact-value">rabulsany.pro.bd</div></div>
       </a>
     </div>
   </div>
 </section>
 
+<div class="cve-ticker-container">
+  <div class="cve-ticker-content" id="cveTicker">
+    <span class="cve-item"><span>[ALERT]</span> Fetching live Zero-Day & CVE threat intel...</span>
+  </div>
+</div>
+
 <footer>
-  © 2026 MD Rabul Sany — All rights reserved. Built for the offense.
+  <div class="wrap">
+    © 2026 MD Rabul Sany — All rights reserved. Built for the offense.<br>
+    <div class="base64-msg" title="Decode me">TG9va2luZyBmb3IgYSBoaWdobHkgc2tpbGxlZCBoYWNrZXI/IFlvdSd2ZSBmb3VuZCBoaW0uIENvbnRhY3QgdXMgbm93Lg==</div>
+  </div>
 </footer>
 
 <script>
-  // Mobile Hamburger Menu Logic
+  // --- Feature 34: Console Warning ---
+  const mask = `
+       .-------.
+     .'         '.
+    /  O      O   \\
+   |      _       |
+   |    '---'     |
+    \\            /
+     '.        .'
+       '------'
+  `;
+  console.log(`%c${mask}\nStop inspecting and hire now.\nContact: mdrabulsany71@gmail.com`, "color: #C0392B; font-family: monospace; font-size: 14px; font-weight: bold;");
+
+  // --- PROGRESS BAR & REVEAL & DECIPHER (Feature 22) ---
+  const chars = '$#&@*%X!01<>?';
+  function scrambleText(element) {
+    if(element.dataset.scrambled === "true") return;
+    const original = element.innerText;
+    element.dataset.scrambled = "true";
+    let iter = 0;
+    const interval = setInterval(() => {
+      element.innerText = original.split('').map((c, i) => {
+        if(i < iter || c === ' ') return original[i];
+        return chars[Math.floor(Math.random() * chars.length)];
+      }).join('');
+      iter += 1/2;
+      if(iter >= original.length) { clearInterval(interval); element.innerText = original; }
+    }, 40);
+  }
+
+  window.addEventListener('scroll', () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('progressBar').style.width = (winScroll / height) * 100 + '%';
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) { 
+        entry.target.classList.add('active'); 
+        const scrambleEls = entry.target.querySelectorAll('.scramble');
+        scrambleEls.forEach(el => scrambleText(el));
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(reveal => observer.observe(reveal));
+  document.querySelector('.hero').classList.add('active');
+
+  // --- MENU & THEME DROPDOWN (Features 25 & 43) ---
   const menuBtn = document.getElementById('menuBtn');
   const navMenu = document.getElementById('navMenu');
   const navLinks = document.querySelectorAll('.navlinks a');
@@ -644,67 +621,150 @@
   menuBtn.addEventListener('click', () => {
     navMenu.classList.toggle('show');
     const icon = menuBtn.querySelector('i');
-    if(navMenu.classList.contains('show')) {
-      icon.classList.remove('fa-bars');
-      icon.classList.add('fa-xmark');
-    } else {
-      icon.classList.remove('fa-xmark');
-      icon.classList.add('fa-bars');
-    }
+    if(navMenu.classList.contains('show')) { icon.classList.replace('fa-bars', 'fa-xmark'); } 
+    else { icon.classList.replace('fa-xmark', 'fa-bars'); }
   });
 
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
       navMenu.classList.remove('show');
-      const icon = menuBtn.querySelector('i');
-      icon.classList.remove('fa-xmark');
-      icon.classList.add('fa-bars');
+      menuBtn.querySelector('i').classList.replace('fa-xmark', 'fa-bars');
     });
   });
 
-  // Dark Mode Toggle Logic
-  const themeToggle = document.getElementById('themeToggle');
-  const body = document.body;
-  const themeIcon = themeToggle.querySelector('i');
+  const themeBtn = document.getElementById('themeToggleBtn');
+  const themeMenu = document.getElementById('themeDropdown');
+  themeBtn.addEventListener('click', () => themeMenu.classList.toggle('show'));
+  
+  function setTheme(theme) {
+    document.body.className = ''; 
+    if(theme === 'dark') document.body.classList.add('dark-theme');
+    else if(theme === 'crt') document.body.classList.add('crt-theme', 'dark-theme');
+    else if(theme === 'red') document.body.classList.add('red-theme');
+    localStorage.setItem('hacker_theme', theme);
+    themeMenu.classList.remove('show');
+  }
+  const savedTheme = localStorage.getItem('hacker_theme');
+  if(savedTheme) setTheme(savedTheme); else setTheme('light');
 
-  // Check saved theme in local storage
-  if (localStorage.getItem('theme') === 'dark') {
-    body.classList.add('dark-theme');
-    themeIcon.classList.replace('fa-moon', 'fa-sun');
+  // --- Feature 28: LIVE CVE TICKER ---
+  const mockCVEs = [
+    "CVE-2024-3094 (Critical) - glibc overflow", "CVE-2024-21626 (High) - runc breakout", 
+    "CVE-2023-4863 (Critical) - WebP 0-Day", "CVE-2023-34362 (Critical) - MOVEit RCE",
+    "Zero-Day Alert: Exploitation detected in the wild"
+  ];
+  function buildTicker(cves) {
+    return cves.map(c => `<span class="cve-item"><span>[ALERT]</span> ${c}</span>`).join('&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;');
+  }
+  fetch('https://api.rss2json.com/v1/api.json?rss_url=https://cvefeed.io/rssfeed/latest.xml')
+    .then(r=>r.json()).then(d => {
+      if(d.items && d.items.length > 0) {
+        let liveCves = d.items.slice(0, 8).map(i => i.title);
+        document.getElementById('cveTicker').innerHTML = buildTicker(liveCves) + "&nbsp;&nbsp;|&nbsp;&nbsp;" + buildTicker(liveCves);
+      } else throw "err";
+    }).catch(() => {
+      document.getElementById('cveTicker').innerHTML = buildTicker(mockCVEs) + "&nbsp;&nbsp;|&nbsp;&nbsp;" + buildTicker(mockCVEs);
+    });
+
+  // --- Feature 46: SECURE SSH RESUME DOWNLOAD ---
+  const resumeBtn = document.getElementById('resumeBtn');
+  const sshOverlay = document.getElementById('sshOverlay');
+  const sshText = document.getElementById('sshText');
+  const driveLink = "https://drive.google.com/file/d/1aLHH_31hZYCyEOKIhV3gv5TIUTEapLkS/view?usp=drivesdk";
+
+  resumeBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    sshOverlay.style.display = 'flex';
+    let steps = [ "Establishing Secure SSH Connection...", "Authenticating via RSA key...", "Access Granted.", "Transferring Resume.pdf...", "Done." ];
+    let i = 0; sshText.innerHTML = '';
+    let interval = setInterval(() => {
+      sshText.innerHTML += steps[i] + "<br>"; i++;
+      if(i === steps.length) {
+        clearInterval(interval);
+        setTimeout(() => { sshOverlay.style.display = 'none'; window.open(driveLink, '_blank'); }, 800);
+      }
+    }, 500);
+  });
+
+  // --- TERMINAL MAGIC (Features 1, 2, 3, 5) ---
+  const termOutput = document.getElementById('termOutput');
+  const termInput = document.getElementById('termInput');
+  const termBody = document.getElementById('termBody');
+  const matrixCanvas = document.getElementById('matrixCanvas');
+  const ctx = matrixCanvas.getContext('2d');
+
+  // Matrix Feature (2)
+  let matrixInterval;
+  function startMatrix() {
+    matrixCanvas.style.display = 'block'; matrixCanvas.width = window.innerWidth; matrixCanvas.height = window.innerHeight;
+    const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレゲゼデベペオォコソトノホモヨョロゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const alphabet = katakana.split(''); const fontSize = 16; const columns = matrixCanvas.width / fontSize;
+    const drops = []; for(let x = 0; x < columns; x++) drops[x] = 1;
+    matrixInterval = setInterval(() => {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+      ctx.fillStyle = '#0F7B4C'; ctx.font = fontSize + 'px monospace';
+      for(let i = 0; i < drops.length; i++) {
+        const text = alphabet[Math.floor(Math.random() * alphabet.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if(drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }, 30);
+  }
+  function stopMatrix() { clearInterval(matrixInterval); matrixCanvas.style.display = 'none'; }
+
+  // Draggable Terminal (5)
+  const termWin = document.getElementById('draggableTerm');
+  const termHeader = document.getElementById('termHeader');
+  let isDragging = false, currentX = 0, currentY = 0, initialX, initialY, xOffset = 0, yOffset = 0;
+  
+  termHeader.addEventListener('mousedown', dragStart);
+  document.addEventListener('mouseup', dragEnd);
+  document.addEventListener('mousemove', drag);
+  
+  function dragStart(e) {
+    initialX = e.clientX - xOffset; initialY = e.clientY - yOffset;
+    if (e.target === termHeader || termHeader.contains(e.target)) isDragging = true;
+  }
+  function dragEnd(e) { initialX = currentX; initialY = currentY; isDragging = false; }
+  function drag(e) {
+    if (isDragging) {
+      e.preventDefault();
+      currentX = e.clientX - initialX; currentY = e.clientY - initialY;
+      xOffset = currentX; yOffset = currentY;
+      termWin.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      termWin.style.zIndex = "1000";
+    }
   }
 
-  themeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark-theme');
-    if (body.classList.contains('dark-theme')) {
-      localStorage.setItem('theme', 'dark');
-      themeIcon.classList.replace('fa-moon', 'fa-sun');
-    } else {
-      localStorage.setItem('theme', 'light');
-      themeIcon.classList.replace('fa-sun', 'fa-moon');
+  // Terminal Boot
+  setTimeout(() => { document.getElementById('termInputRow').style.display = 'flex'; }, 500);
+  termBody.addEventListener('click', () => termInput.focus());
+
+  // Commands
+  termInput.addEventListener('keypress', function(e) {
+    if(e.key === 'Enter') {
+      const cmd = this.value.trim().toLowerCase(); this.value = '';
+      termOutput.innerHTML += `<div class="term-cmd-echo"><span class="prompt">guest@rabulsany:~$</span> ${cmd}</div>`;
+      let response = '';
+
+      if(cmd === 'help') response = `Commands: <span style="color:var(--amber)">whoami, matrix, sudo su, wget resume.pdf, theme [dark/light/red/crt], clear</span>`;
+      else if(cmd === 'whoami') response = 'MD Rabul Sany — Elite Hacker. <span class="sev-crit">STATUS: OPSEC ENFORCED</span>';
+      else if(cmd === 'matrix') { startMatrix(); response = 'Entering the Matrix...'; }
+      else if(cmd === 'sudo su') response = 'Password for guest: <br><span class="sev-crit">ACCESS DENIED. This incident will be reported.</span>';
+      else if(cmd === 'wget resume.pdf') { resumeBtn.click(); response = 'Downloading...'; }
+      else if(cmd.startsWith('theme ')) {
+        let t = cmd.split(' ')[1];
+        if(['dark','light','red','crt'].includes(t)) { setTheme(t); response = `Theme changed to ${t}.`; }
+        else response = `Invalid theme.`;
+      }
+      else if(cmd === 'clear') { termOutput.innerHTML = ''; stopMatrix(); return; }
+      else if(cmd !== '') response = `bash: ${cmd}: command not found.`;
+
+      if(response) termOutput.innerHTML += `<div class="term-response">${response}</div>`;
+      termBody.scrollTop = termBody.scrollHeight;
     }
   });
-
-  // Terminal Animation script
-  const lines = [
-    { t: '<span class="prompt">$</span> subfinder -d target.com -silent | httpx -title -status-code', d: 0 },
-    { t: '[200] https://dev.target.com/api/v1  [API Gateway]', d: 800 },
-    { t: '<span class="prompt">$</span> ffuf -w custom-wordlist.txt -u https://dev.target.com/api/v1/FUZZ', d: 1600 },
-    { t: '[+] /internal/users  <span class="sev sev-crit" style="margin-left:6px;">CRITICAL — IDOR</span>', d: 2400 },
-    { t: '[+] /reset-token     <span class="sev sev-high" style="margin-left:6px;">HIGH — Logic Flaw</span>', d: 3000 },
-    { t: '<span class="prompt">$</span> whoami', d: 3800 },
-    { t: 'MD Rabul Sany — Security Researcher <span class="sev sev-info" style="margin-left:6px;">STATUS: ACTIVE</span>', d: 4400 }
-  ];
-  const el = document.getElementById('termBody');
-  lines.forEach(line => {
-    const div = document.createElement('div');
-    div.className = 'term-line';
-    div.style.animationDelay = line.d + 'ms';
-    div.innerHTML = line.t;
-    el.appendChild(div);
-  });
-  const cursor = document.createElement('span');
-  cursor.className = 'cursor';
-  setTimeout(() => el.appendChild(cursor), 4400);
 </script>
 
 </body>
