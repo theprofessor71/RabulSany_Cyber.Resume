@@ -14,7 +14,7 @@
 <meta name="twitter:title" content="Rabul Sany — Cyber Security Researcher">
 <meta name="twitter:description" content="Penetration Tester & Bug Bounty Hunter specializing in web/API vulnerabilities, business logic flaws and Active Directory penetration testing.">
 <meta name="twitter:image" content="https://cdn-icons-png.flaticon.com/512/1055/1055685.png">
-<link rel="icon" id="favicon" href="https://cdn-icons-png.flaticon.com/512/1055/1055685.png" type="image/png">
+<link rel="icon" id="favicon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%230D1117'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='56' font-weight='bold' fill='%230F7B4C' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -75,7 +75,8 @@
 
   /* ---------- NAV ---------- */
   header{ position:sticky;top:0;z-index:50; background:var(--header-bg); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
-  nav{ max-width:920px;margin:0 auto;padding:14px 6%; display:flex;align-items:center;justify-content:space-between; }
+  nav{ display:flex;align-items:center;justify-content:space-between; }
+  .nav-wrap{ width:100%;max-width:920px;margin:0 auto;padding:14px 6%; display:flex;align-items:center;justify-content:space-between; }
   
   .brand{ font-family:var(--mono);font-weight:700;font-size:15px;letter-spacing:-0.02em; display:flex;align-items:center;gap:8px; white-space: nowrap; color: var(--ink); transition: 0.3s; }
   .brand:hover { color: var(--green); text-shadow: 0 0 10px var(--green); }
@@ -295,6 +296,7 @@
 
 <header>
   <nav>
+    <div class="nav-wrap">
     <a href="#top" class="brand" title="Back to top">
       <span class="dot"></span>rabul<span class="brand-ext">@security</span>:~<span class="blink-dollar">$</span>
     </a>
@@ -330,6 +332,7 @@
         <i class="fa-solid fa-bars"></i>
       </button>
     </div>
+    </div>
   </nav>
 </header>
 
@@ -346,7 +349,7 @@
   <div class="wrap">
     <div class="sec-head"><span class="sec-tag">whoami</span><h2 class="scramble">Profile &amp; Impact</h2><div class="sec-rule"></div></div>
     <p class="profile-text">
-      Results-driven <strong>Cyber Security Researcher</strong> and <strong>Ethical Hacker</strong> with 5+ years of hands-on experience in Vulnerability Assessment, Web & API Penetration Testing and Bug Bounty Hunting. Highly active on <strong>HackerOne</strong> and <strong>Intigriti</strong>. Holds industry-recognized certifications including <strong>PNPT</strong>, <strong>CHFI</strong> and <strong>CND</strong>.
+      Results-driven <strong>Cyber Security Researcher</strong> and <strong>Ethical Hacker</strong> with 5+ years of hands-on experience in Vulnerability Assessment, Web & API Penetration Testing and Bug Bounty Hunting. Highly active on <strong>HackerOne</strong> and <strong>Intigriti</strong>. Holds industry-recognized certifications including <strong>PNPT</strong>, <strong>CHFI</strong>, and <strong>CND</strong>.
     </p>
     <div class="stats-grid">
       <div class="stat-card"><div class="num">1200+</div><div class="label">Reputation Score</div></div>
@@ -627,7 +630,7 @@
      '.        .'
        '------'
   `;
-  console.log(`%c${mask}\nStop inspecting and hire now.\n`, "color: #C0392B; font-family: monospace; font-size: 14px; font-weight: bold;");
+  console.log(`%c${mask}\nStop inspecting and hire now.\n, "color: #C0392B; font-family: monospace; font-size: 14px; font-weight: bold;");
 
   // --- PROGRESS BAR & REVEAL & DECIPHER (Feature 22) ---
   const chars = '$#&@*%X!01<>?';
@@ -902,11 +905,9 @@
     const cards = slider.querySelectorAll('.slider-card');
     if(cards.length < 2) return;
     slider.classList.add('has-focus');
-    const sliderCenter = slider.scrollLeft + slider.clientWidth / 2;
     let closest = null, minDist = Infinity;
     cards.forEach(card => {
-      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-      const dist = Math.abs(cardCenter - sliderCenter);
+      const dist = Math.abs(card.offsetLeft - slider.scrollLeft);
       if(dist < minDist) { minDist = dist; closest = card; }
     });
     cards.forEach(c => c.classList.remove('focus-card'));
