@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>Rabul Sany — Cyber Security Researcher</title>
-<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1055/1055685.png" type="image/png">
+<meta name="description" content="MD Rabul Sany — Cyber Security Researcher, Penetration Tester & Bug Bounty Hunter with 5+ years of experience in web/API vulnerabilities, business logic flaws, and Active Directory penetration testing.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rabul Sany — Cyber Security Researcher">
+<meta property="og:description" content="Penetration Tester & Bug Bounty Hunter specializing in web/API vulnerabilities, business logic flaws and Active Directory penetration testing.">
+<meta property="og:url" content="https://rabulsany.pro.bd/">
+<meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/1055/1055685.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rabul Sany — Cyber Security Researcher">
+<meta name="twitter:description" content="Penetration Tester & Bug Bounty Hunter specializing in web/API vulnerabilities, business logic flaws and Active Directory penetration testing.">
+<meta name="twitter:image" content="https://cdn-icons-png.flaticon.com/512/1055/1055685.png">
+<link rel="icon" id="favicon" href="https://cdn-icons-png.flaticon.com/512/1055/1055685.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -56,7 +66,8 @@
     line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x: hidden;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
-  ::selection{background:var(--green);color:#fff;}
+  ::selection{background:#000;color:#39ff6a;text-shadow:0 0 6px rgba(57,255,106,0.6);}
+  body.red-theme ::selection{background:#000;color:#ff4d4d;text-shadow:0 0 6px rgba(255,77,77,0.6);}
   a{color:inherit;text-decoration:none;}
   .wrap{width: 100%; max-width:920px; margin:0 auto; padding:0 6%;}
 
@@ -197,7 +208,7 @@
   .edu-card{background:var(--bg-alt);border:1px solid var(--line);border-radius:8px;padding:18px 20px;max-width:600px;}
 
   /* --- TERMINAL --- */
-  .term{ margin-top:36px;background:#0D1210;border-radius:6px;overflow:hidden; border:1px solid #1c2a24; box-shadow:0 12px 30px -10px rgba(15,123,76,0.25); position: relative; z-index: 10; }
+  .term{ margin-top:4px;background:#0D1210;border-radius:6px;overflow:hidden; border:1px solid #1c2a24; box-shadow:0 12px 30px -10px rgba(15,123,76,0.25); position: relative; z-index: 10; }
   .term-bar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:#101915;border-bottom:1px solid #1c2a24; cursor: grab;}
   .term-bar:active { cursor: grabbing; }
   .term-bar i{width:9px;height:9px;border-radius:50%;display:inline-block;}
@@ -213,11 +224,40 @@
   .term-cmd-echo { color: #57d99a; margin-bottom: 2px; }
   .sev-crit{background:rgba(192, 57, 43, 0.15);color:var(--red); padding:2px 5px;border-radius:3px;font-size:9.5px;font-weight:bold;}
 
-  /* --- SECURE SSH DOWNLOAD OVERLAY --- */
-  #sshOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 100000; display: none; align-items: center; justify-content: center; color: #57d99a; font-family: var(--mono); font-size: 14px; }
-
   /* --- MATRIX CANVAS --- */
   #matrixCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; display: none; opacity: 0.15; pointer-events: none; }
+
+  /* --- CYBER SPOTLIGHT (mouse glow, dark themes only) --- */
+  #cyberSpotlight {
+    position: fixed; inset: 0; z-index: 9997; pointer-events: none;
+    opacity: 0; transition: opacity .4s ease;
+    background: radial-gradient(circle 220px at var(--sx,50%) var(--sy,50%), rgba(15,123,76,0.10), transparent 70%);
+  }
+  body.dark-theme #cyberSpotlight, body.crt-theme #cyberSpotlight { opacity: 1; }
+  body.red-theme #cyberSpotlight { opacity: 1; background: radial-gradient(circle 220px at var(--sx,50%) var(--sy,50%), rgba(255,51,51,0.12), transparent 70%); }
+  @media (prefers-reduced-motion: reduce) { #cyberSpotlight { display: none; } }
+
+  /* --- MAGNETIC BUTTONS --- */
+  .btn-header, .contact-icon { will-change: transform; transition: transform .18s ease, background-color .2s, color .2s, border-color .2s; }
+
+  /* --- DATA EXTRACTION COPY TAG --- */
+  .contact-item { position: relative; }
+  .copied-tag {
+    position: absolute; top: 6px; right: 10px; background: #000; color: #39ff6a;
+    font-family: var(--mono); font-size: 9.5px; font-weight: 700; letter-spacing: .03em;
+    padding: 3px 7px; border-radius: 4px; opacity: 0; pointer-events: none;
+    transform: translateY(-4px); transition: opacity .2s, transform .2s;
+    border: 1px solid rgba(57,255,106,0.4);
+  }
+  .copied-tag.show { opacity: 1; transform: translateY(0); }
+
+  /* --- HOVER SCRAMBLE WORDS --- */
+  .profile-text strong { cursor: default; }
+
+  /* --- FOCUS CARD SCALING (sliders) --- */
+  .slider-card { transition: transform .35s ease, filter .35s ease, opacity .35s ease; }
+  .horizontal-slider.has-focus .slider-card { transform: scale(0.96); filter: blur(1.5px); opacity: 0.72; }
+  .horizontal-slider.has-focus .slider-card.focus-card { transform: scale(1.03); filter: none; opacity: 1; z-index: 2; }
 
   /* ---------- CONTACT & FOOTER ---------- */
   .contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
@@ -239,16 +279,19 @@
   footer{padding:20px 0 40px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--slate);}
   .base64-msg { font-size: 10px; margin-top: 10px; color: var(--ink-soft); word-break: break-all; max-width: 600px; margin-left: auto; margin-right: auto; opacity: 0.5; transition: 0.3s;}
   .base64-msg:hover { opacity: 1; color: var(--green); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .brand .dot, .glitch-hover::before, .glitch-hover::after,
+    .cve-ticker-content, .scroll-progress, body { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
 </style>
 </head>
 <body id="top">
 
 <canvas id="matrixCanvas"></canvas>
 <div class="scroll-progress" id="progressBar"></div>
-
-<div id="sshOverlay">
-  <div id="sshText"></div>
-</div>
+<div id="cyberSpotlight"></div>
 
 <header>
   <nav>
@@ -269,14 +312,14 @@
       </div>
       
       <div class="nav-actions">
-        <button id="themeToggleBtn" class="btn-header outline theme-btn" aria-label="Themes">
+        <button id="themeToggleBtn" class="btn-header outline theme-btn" aria-label="Themes" aria-haspopup="true" aria-expanded="false">
           <i class="fa-solid fa-palette"></i>
         </button>
-        <div class="theme-dropdown" id="themeDropdown">
-          <div class="theme-option" onclick="setTheme('light')"><i class="fa-solid fa-sun"></i> Light</div>
-          <div class="theme-option" onclick="setTheme('dark')"><i class="fa-solid fa-moon"></i> Dark</div>
-          <div class="theme-option" onclick="setTheme('crt')"><i class="fa-solid fa-tv"></i> CRT Retro</div>
-          <div class="theme-option" style="color:var(--red);" onclick="setTheme('red')"><i class="fa-solid fa-skull"></i> Red Team</div>
+        <div class="theme-dropdown" id="themeDropdown" role="menu">
+          <div class="theme-option" role="menuitem" tabindex="0" data-theme="light"><i class="fa-solid fa-sun"></i> Light</div>
+          <div class="theme-option" role="menuitem" tabindex="0" data-theme="dark"><i class="fa-solid fa-moon"></i> Dark</div>
+          <div class="theme-option" role="menuitem" tabindex="0" data-theme="crt"><i class="fa-solid fa-tv"></i> CRT Retro</div>
+          <div class="theme-option" role="menuitem" tabindex="0" style="color:var(--red);" data-theme="red"><i class="fa-solid fa-skull"></i> Red Team</div>
         </div>
 
         <a href="https://drive.google.com/file/d/1aLHH_31hZYCyEOKIhV3gv5TIUTEapLkS/view?usp=drivesdk" target="_blank" id="resumeBtn" class="btn-header primary"><i class="fa-solid fa-download"></i> Resume</a>
@@ -303,7 +346,7 @@
   <div class="wrap">
     <div class="sec-head"><span class="sec-tag">whoami</span><h2 class="scramble">Profile &amp; Impact</h2><div class="sec-rule"></div></div>
     <p class="profile-text">
-      Results-driven <strong>Cyber Security Researcher</strong> and <strong>Ethical Hacker</strong> with 5+ years of hands-on experience in Vulnerability Assessment, Web & API Penetration Testing and Bug Bounty Hunting. Highly active on <strong>HackerOne</strong> and <strong>Intigriti</strong>. Holds industry-recognized certifications including <strong>PNPT</strong>, <strong>CHFI</strong>, and <strong>CND</strong>.
+      Results-driven <strong>Cyber Security Researcher</strong> and <strong>Ethical Hacker</strong> with 5+ years of hands-on experience in Vulnerability Assessment, Web & API Penetration Testing and Bug Bounty Hunting. Highly active on <strong>HackerOne</strong> and <strong>Intigriti</strong>. Holds industry-recognized certifications including <strong>PNPT</strong>, <strong>CHFI</strong> and <strong>CND</strong>.
     </p>
     <div class="stats-grid">
       <div class="stat-card"><div class="num">1200+</div><div class="label">Reputation Score</div></div>
@@ -388,6 +431,7 @@
           <li>Leveraged PNPT skills to perform internal network and Active Directory (AD) audits, successfully simulating real-world APT behaviors to uncover privilege escalation paths.</li>
           <li>Delivered executive-level risk reports incorporating CVSS v3.1 scoring and collaborated directly with development teams to ensure effective patch remediation.</li>
         </ul>
+        <div style="font-size: 11.5px; color: var(--slate); font-style: italic; margin-top: 10px; padding-left: 16px;">Note: Run in parallel with ongoing bug bounty work below.</div>
       </div>
     </div>
     <div class="exp-item">
@@ -509,7 +553,12 @@
       <div class="exp-role">Diploma in Engineering</div>
       <div class="exp-org">Bodiul Alam Science &amp; Technology Institute</div>
     </div>
+  </div>
+</section>
 
+<section id="terminal" class="reveal">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-tag">exec</span><h2 class="scramble">Live Recon Terminal</h2><div class="sec-rule"></div></div>
     <div class="term" id="draggableTerm">
       <div class="term-bar" id="termHeader" title="Drag me!"><i></i><i></i><i></i><span>recon-terminal.sh</span></div>
       <div class="term-body" id="termBody">
@@ -527,13 +576,15 @@
   <div class="wrap">
     <div class="sec-head"><span class="sec-tag">cat contact.info</span><h2 class="scramble">Get In Touch</h2><div class="sec-rule"></div></div>
     <div class="contact-grid">
-      <a class="contact-item" href="mailto:mdrabulsany71@gmail.com">
+      <a class="contact-item copy-extract" data-copy="mdrabulsany71@gmail.com" href="mailto:mdrabulsany71@gmail.com">
         <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
         <div><div class="contact-label">EMAIL</div><div class="contact-value">mdrabulsany71@gmail.com</div></div>
+        <span class="copied-tag">[Payload Copied]</span>
       </a>
-      <a class="contact-item" href="tel:+8801895202102">
+      <a class="contact-item copy-extract" data-copy="+8801895202102" href="tel:+8801895202102">
         <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
         <div><div class="contact-label">PHONE</div><div class="contact-value">+880 1895-202102</div></div>
+        <span class="copied-tag">[Payload Copied]</span>
       </a>
       <a class="contact-item" href="https://linkedin.com/in/mdrabulsany" target="_blank" rel="noopener">
         <div class="contact-icon"><i class="fa-brands fa-linkedin-in"></i></div>
@@ -576,7 +627,7 @@
      '.        .'
        '------'
   `;
-  console.log(`%c${mask}\nStop inspecting and hire now.\nContact: mdrabulsany71@gmail.com`, "color: #C0392B; font-family: monospace; font-size: 14px; font-weight: bold;");
+  console.log(`%c${mask}\nStop inspecting and hire now.\n`, "color: #C0392B; font-family: monospace; font-size: 14px; font-weight: bold;");
 
   // --- PROGRESS BAR & REVEAL & DECIPHER (Feature 22) ---
   const chars = '$#&@*%X!01<>?';
@@ -634,8 +685,18 @@
 
   const themeBtn = document.getElementById('themeToggleBtn');
   const themeMenu = document.getElementById('themeDropdown');
-  themeBtn.addEventListener('click', () => themeMenu.classList.toggle('show'));
-  
+  themeBtn.addEventListener('click', () => {
+    const isShown = themeMenu.classList.toggle('show');
+    themeBtn.setAttribute('aria-expanded', isShown ? 'true' : 'false');
+  });
+
+  document.querySelectorAll('.theme-option').forEach(opt => {
+    opt.addEventListener('click', () => setTheme(opt.dataset.theme));
+    opt.addEventListener('keypress', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setTheme(opt.dataset.theme); }
+    });
+  });
+
   function setTheme(theme) {
     document.body.className = ''; 
     if(theme === 'dark') document.body.classList.add('dark-theme');
@@ -643,6 +704,7 @@
     else if(theme === 'red') document.body.classList.add('red-theme');
     localStorage.setItem('hacker_theme', theme);
     themeMenu.classList.remove('show');
+    themeBtn.setAttribute('aria-expanded', 'false');
   }
   const savedTheme = localStorage.getItem('hacker_theme');
   if(savedTheme) setTheme(savedTheme); else setTheme('light');
@@ -653,38 +715,22 @@
     "CVE-2023-4863 (Critical) - WebP 0-Day", "CVE-2023-34362 (Critical) - MOVEit RCE",
     "Zero-Day Alert: Exploitation detected in the wild"
   ];
-  function buildTicker(cves) {
-    return cves.map(c => `<span class="cve-item"><span>[ALERT]</span> ${c}</span>`).join('&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;');
+  function buildTicker(cves, isFallback) {
+    const label = isFallback ? '[ARCHIVE]' : '[ALERT]';
+    return cves.map(c => `<span class="cve-item"><span>${label}</span> ${c}</span>`).join('&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;');
   }
   fetch('https://api.rss2json.com/v1/api.json?rss_url=https://cvefeed.io/rssfeed/latest.xml')
     .then(r=>r.json()).then(d => {
       if(d.items && d.items.length > 0) {
         let liveCves = d.items.slice(0, 8).map(i => i.title);
-        document.getElementById('cveTicker').innerHTML = buildTicker(liveCves) + "&nbsp;&nbsp;|&nbsp;&nbsp;" + buildTicker(liveCves);
+        document.getElementById('cveTicker').innerHTML = buildTicker(liveCves, false) + "&nbsp;&nbsp;|&nbsp;&nbsp;" + buildTicker(liveCves, false);
       } else throw "err";
     }).catch(() => {
-      document.getElementById('cveTicker').innerHTML = buildTicker(mockCVEs) + "&nbsp;&nbsp;|&nbsp;&nbsp;" + buildTicker(mockCVEs);
+      document.getElementById('cveTicker').innerHTML = buildTicker(mockCVEs, true) + "&nbsp;&nbsp;|&nbsp;&nbsp;" + buildTicker(mockCVEs, true);
     });
 
-  // --- Feature 46: SECURE SSH RESUME DOWNLOAD ---
+  // --- RESUME BUTTON: plain, smooth new-tab open (no overlay) ---
   const resumeBtn = document.getElementById('resumeBtn');
-  const sshOverlay = document.getElementById('sshOverlay');
-  const sshText = document.getElementById('sshText');
-  const driveLink = "https://drive.google.com/file/d/1aLHH_31hZYCyEOKIhV3gv5TIUTEapLkS/view?usp=drivesdk";
-
-  resumeBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    sshOverlay.style.display = 'flex';
-    let steps = [ "Establishing Secure SSH Connection...", "Authenticating via RSA key...", "Access Granted.", "Transferring Resume.pdf...", "Done." ];
-    let i = 0; sshText.innerHTML = '';
-    let interval = setInterval(() => {
-      sshText.innerHTML += steps[i] + "<br>"; i++;
-      if(i === steps.length) {
-        clearInterval(interval);
-        setTimeout(() => { sshOverlay.style.display = 'none'; window.open(driveLink, '_blank'); }, 800);
-      }
-    }, 500);
-  });
 
   // --- TERMINAL MAGIC (Features 1, 2, 3, 5) ---
   const termOutput = document.getElementById('termOutput');
@@ -694,8 +740,10 @@
   const ctx = matrixCanvas.getContext('2d');
 
   // Matrix Feature (2)
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let matrixInterval;
   function startMatrix() {
+    if(prefersReducedMotion) return;
     matrixCanvas.style.display = 'block'; matrixCanvas.width = window.innerWidth; matrixCanvas.height = window.innerHeight;
     const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレゲゼデベペオォコソトノホモヨョロゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const alphabet = katakana.split(''); const fontSize = 16; const columns = matrixCanvas.width / fontSize;
@@ -737,34 +785,171 @@
     }
   }
 
-  // Terminal Boot
-  setTimeout(() => { document.getElementById('termInputRow').style.display = 'flex'; }, 500);
   termBody.addEventListener('click', () => termInput.focus());
 
-  // Commands
+  // Shared command processor (used by both manual typing and auto-type-on-scroll)
+  function runCommand(cmd) {
+    termOutput.innerHTML += `<div class="term-cmd-echo"><span class="prompt">guest@rabulsany:~$</span> ${cmd}</div>`;
+    let response = '';
+
+    if(cmd === 'help') response = `Commands: <span style="color:var(--amber)">whoami, matrix, sudo su, wget resume.pdf, theme [dark/light/red/crt], clear</span>`;
+    else if(cmd === 'whoami') response = 'MD Rabul Sany — Elite Hacker. <span class="sev-crit">STATUS: OPSEC ENFORCED</span>';
+    else if(cmd === 'matrix') { startMatrix(); response = 'Entering the Matrix...'; }
+    else if(cmd === 'sudo su') response = 'Password for guest: <br><span class="sev-crit">ACCESS DENIED. This incident will be reported.</span>';
+    else if(cmd === 'wget resume.pdf') { resumeBtn.click(); response = 'Downloading...'; }
+    else if(cmd.startsWith('theme ')) {
+      let t = cmd.split(' ')[1];
+      if(['dark','light','red','crt'].includes(t)) { setTheme(t); response = `Theme changed to ${t}.`; }
+      else response = `Invalid theme.`;
+    }
+    else if(cmd === 'clear') { termOutput.innerHTML = ''; stopMatrix(); return; }
+    else if(cmd !== '') response = `bash: ${cmd}: command not found.`;
+
+    if(response) termOutput.innerHTML += `<div class="term-response">${response}</div>`;
+    termBody.scrollTop = termBody.scrollHeight;
+  }
+
+  // Commands (manual typing)
   termInput.addEventListener('keypress', function(e) {
     if(e.key === 'Enter') {
       const cmd = this.value.trim().toLowerCase(); this.value = '';
-      termOutput.innerHTML += `<div class="term-cmd-echo"><span class="prompt">guest@rabulsany:~$</span> ${cmd}</div>`;
-      let response = '';
-
-      if(cmd === 'help') response = `Commands: <span style="color:var(--amber)">whoami, matrix, sudo su, wget resume.pdf, theme [dark/light/red/crt], clear</span>`;
-      else if(cmd === 'whoami') response = 'MD Rabul Sany — Elite Hacker. <span class="sev-crit">STATUS: OPSEC ENFORCED</span>';
-      else if(cmd === 'matrix') { startMatrix(); response = 'Entering the Matrix...'; }
-      else if(cmd === 'sudo su') response = 'Password for guest: <br><span class="sev-crit">ACCESS DENIED. This incident will be reported.</span>';
-      else if(cmd === 'wget resume.pdf') { resumeBtn.click(); response = 'Downloading...'; }
-      else if(cmd.startsWith('theme ')) {
-        let t = cmd.split(' ')[1];
-        if(['dark','light','red','crt'].includes(t)) { setTheme(t); response = `Theme changed to ${t}.`; }
-        else response = `Invalid theme.`;
-      }
-      else if(cmd === 'clear') { termOutput.innerHTML = ''; stopMatrix(); return; }
-      else if(cmd !== '') response = `bash: ${cmd}: command not found.`;
-
-      if(response) termOutput.innerHTML += `<div class="term-response">${response}</div>`;
-      termBody.scrollTop = termBody.scrollHeight;
+      runCommand(cmd);
     }
   });
+
+  // --- Terminal Auto-Type on Scroll ---
+  // Terminal stays idle until its dedicated section actually scrolls into view,
+  // then it "live types" a short recon sequence before handing control to the user.
+  const terminalSection = document.getElementById('terminal');
+  let terminalStarted = false;
+  function autoTypeSequence(commands, i = 0) {
+    if(i >= commands.length) { document.getElementById('termInputRow').style.display = 'flex'; termInput.focus(); return; }
+    const cmd = commands[i];
+    let c = 0;
+    const typer = setInterval(() => {
+      termInput.value = cmd.slice(0, c + 1); c++;
+      if(c === cmd.length) {
+        clearInterval(typer);
+        setTimeout(() => {
+          runCommand(cmd);
+          termInput.value = '';
+          setTimeout(() => autoTypeSequence(commands, i + 1), 500);
+        }, 250);
+      }
+    }, 55);
+  }
+  if(terminalSection) {
+    const termObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting && !terminalStarted) {
+          terminalStarted = true;
+          if(prefersReducedMotion) { document.getElementById('termInputRow').style.display = 'flex'; return; }
+          autoTypeSequence(['whoami', 'help']);
+        }
+      });
+    }, { threshold: 0.35 });
+    termObserver.observe(terminalSection);
+  }
+
+  // --- Cyber Spotlight ---
+  const spotlight = document.getElementById('cyberSpotlight');
+  if(!prefersReducedMotion) {
+    window.addEventListener('mousemove', (e) => {
+      spotlight.style.setProperty('--sx', e.clientX + 'px');
+      spotlight.style.setProperty('--sy', e.clientY + 'px');
+    }, { passive: true });
+  }
+
+  // --- Magnetic Buttons ---
+  function makeMagnetic(el, strength = 0.35) {
+    el.addEventListener('mousemove', (e) => {
+      const r = el.getBoundingClientRect();
+      const relX = e.clientX - (r.left + r.width / 2);
+      const relY = e.clientY - (r.top + r.height / 2);
+      el.style.transform = `translate(${relX * strength}px, ${relY * strength}px)`;
+    });
+    el.addEventListener('mouseleave', () => { el.style.transform = 'translate(0,0)'; });
+  }
+  if(!prefersReducedMotion) {
+    document.querySelectorAll('.btn-header').forEach(el => makeMagnetic(el, 0.3));
+    document.querySelectorAll('.contact-icon').forEach(el => makeMagnetic(el, 0.4));
+  }
+
+  // --- Hover-Scramble on bold Profile keywords ---
+  function hoverScramble(el) {
+    if(el.dataset.busy === "true") return;
+    el.dataset.busy = "true";
+    const original = el.innerText;
+    const scrambleChars = '$#&@*%X!01<>?';
+    let iter = 0;
+    const total = original.length;
+    const interval = setInterval(() => {
+      el.innerText = original.split('').map((c, i) => {
+        if(c === ' ') return ' ';
+        if(i < iter) return original[i];
+        return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+      }).join('');
+      iter += 1;
+      if(iter > total) { clearInterval(interval); el.innerText = original; el.dataset.busy = "false"; }
+    }, 35);
+  }
+  document.querySelectorAll('.profile-text strong').forEach(el => {
+    el.addEventListener('mouseenter', () => hoverScramble(el));
+  });
+
+  // --- Focus Card Scaling on horizontal sliders ---
+  function updateFocusCard(slider) {
+    const cards = slider.querySelectorAll('.slider-card');
+    if(cards.length < 2) return;
+    slider.classList.add('has-focus');
+    const sliderCenter = slider.scrollLeft + slider.clientWidth / 2;
+    let closest = null, minDist = Infinity;
+    cards.forEach(card => {
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const dist = Math.abs(cardCenter - sliderCenter);
+      if(dist < minDist) { minDist = dist; closest = card; }
+    });
+    cards.forEach(c => c.classList.remove('focus-card'));
+    if(closest) closest.classList.add('focus-card');
+  }
+  document.querySelectorAll('.horizontal-slider').forEach(slider => {
+    updateFocusCard(slider);
+    slider.addEventListener('scroll', () => updateFocusCard(slider), { passive: true });
+    window.addEventListener('resize', () => updateFocusCard(slider));
+  });
+
+  // --- Data Extraction: click-to-copy on Email/Phone ---
+  document.querySelectorAll('.copy-extract').forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      const value = item.dataset.copy;
+      const tag = item.querySelector('.copied-tag');
+      navigator.clipboard.writeText(value).then(() => {
+        tag.classList.add('show');
+        setTimeout(() => tag.classList.remove('show'), 2000);
+      }).catch(() => {
+        // Clipboard blocked (e.g. insecure context) — fall back to normal link action.
+        window.location.href = item.getAttribute('href');
+      });
+    });
+  });
+
+  // --- Dynamic Favicon on Tab Blur ---
+  (function () {
+    const favicon = document.getElementById('favicon');
+    const originalTitle = document.title;
+    const originalFaviconHref = favicon.href;
+    const lostFaviconHref = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23ff3333'/%3E%3C/svg%3E";
+    document.addEventListener('visibilitychange', () => {
+      if(document.hidden) {
+        document.title = 'Connection Lost...';
+        favicon.href = lostFaviconHref;
+      } else {
+        document.title = originalTitle;
+        favicon.href = originalFaviconHref;
+      }
+    });
+  })();
 </script>
 
 </body>
