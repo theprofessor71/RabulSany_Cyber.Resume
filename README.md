@@ -1,2 +1,1 @@
-# RabulSany_Cyber.Resume
-rabulsany.pro.bd
+# MRS_Cyber.Resume
