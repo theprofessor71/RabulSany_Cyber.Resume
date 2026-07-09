@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rabul Sany — Cyber Security Researcher</title>
 <meta name="description" content="MD Rabul Sany — Cyber Security Researcher, Penetration Tester & Bug Bounty Hunter with 5+ years of experience in web/API vulnerabilities, business logic flaws, and Active Directory penetration testing.">
 <meta property="og:type" content="website">
@@ -111,7 +111,7 @@
     .navlinks.show { display: flex; }
     .menu-btn { display: block; }
   }
-  @media (max-width:480px){ .nav-actions { gap: 6px; } .btn-header { padding: 6px 10px; font-size: 11px; } .brand-ext { display: none; } }
+  @media (max-width:480px){ .nav-actions { gap: 6px; } .btn-header { padding: 6px 10px; font-size: 11px; } .btn-header .btn-label { display: none; } .brand-ext { display: none; } }
 
   .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
   .reveal.active { opacity: 1; transform: translateY(0); }
@@ -182,7 +182,8 @@
 
   .slider-card { border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; flex: 0 0 85%; scroll-snap-align: start; display: flex; flex-direction: column; transition: 0.2s; }
   @media(min-width: 768px){ .slider-card{ flex: 0 0 45%; } }
-  
+  .swipe-hint { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; font-family: var(--mono); font-size: 11px; color: var(--slate); }
+
   .proj-card { background: var(--bg-alt); }
   .proj-card h3 { font-family: var(--mono); font-size: 14.5px; margin-bottom: 6px; color: var(--ink); }
   .proj-card p { color: var(--ink-soft); font-size: 13px; flex-grow: 1; margin-bottom: 14px;}
@@ -205,6 +206,7 @@
   .cert-badge{font-size:18px;color:var(--green);background:var(--green-soft);border-radius:6px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;}
   .cert-name{font-weight:600;font-size:13px;}
   .cert-name a:hover { color: var(--green); text-decoration: underline; }
+  .cert-org { font-family: var(--mono); font-size: 11px; color: var(--slate); margin-top: 2px; }
 
   .edu-card{background:var(--bg-alt);border:1px solid var(--line);border-radius:8px;padding:18px 20px;max-width:600px;}
 
@@ -319,11 +321,11 @@
           <div class="theme-option" role="menuitem" tabindex="0" style="color:var(--red);" data-theme="red"><i class="fa-solid fa-skull"></i> Red Team</div>
         </div>
 
-        <a href="https://drive.google.com/file/d/1aLHH_31hZYCyEOKIhV3gv5TIUTEapLkS/view?usp=drivesdk" target="_blank" id="resumeBtn" class="btn-header primary"><i class="fa-solid fa-download"></i> Resume</a>
-        <a href="#contact" class="btn-header outline"><i class="fa-solid fa-paper-plane"></i> Contact</a>
+        <a href="https://drive.google.com/file/d/1aLHH_31hZYCyEOKIhV3gv5TIUTEapLkS/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" id="resumeBtn" class="btn-header primary" aria-label="Download Resume"><i class="fa-solid fa-download"></i> <span class="btn-label">Resume</span></a>
+        <a href="#contact" class="btn-header outline" aria-label="Contact"><i class="fa-solid fa-paper-plane"></i> <span class="btn-label">Contact</span></a>
       </div>
 
-      <button class="menu-btn" id="menuBtn" aria-label="Toggle Menu">
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle Menu" aria-expanded="false" aria-controls="navMenu">
         <i class="fa-solid fa-bars"></i>
       </button>
     </div>
@@ -645,9 +647,9 @@
   }
 
   window.addEventListener('scroll', () => {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const winScroll = window.scrollY || document.documentElement.scrollTop;
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    document.getElementById('progressBar').style.width = (winScroll / height) * 100 + '%';
+    document.getElementById('progressBar').style.width = (height > 0 ? (winScroll / height) * 100 : 0) + '%';
   });
 
   const observer = new IntersectionObserver((entries) => {
@@ -668,15 +670,17 @@
   const navLinks = document.querySelectorAll('.navlinks a');
 
   menuBtn.addEventListener('click', () => {
-    navMenu.classList.toggle('show');
+    const isShown = navMenu.classList.toggle('show');
+    menuBtn.setAttribute('aria-expanded', isShown ? 'true' : 'false');
     const icon = menuBtn.querySelector('i');
-    if(navMenu.classList.contains('show')) { icon.classList.replace('fa-bars', 'fa-xmark'); } 
+    if(isShown) { icon.classList.replace('fa-bars', 'fa-xmark'); }
     else { icon.classList.replace('fa-xmark', 'fa-bars'); }
   });
 
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
       navMenu.classList.remove('show');
+      menuBtn.setAttribute('aria-expanded', 'false');
       menuBtn.querySelector('i').classList.replace('fa-xmark', 'fa-bars');
     });
   });
@@ -707,6 +711,24 @@
   const savedTheme = localStorage.getItem('hacker_theme');
   if(savedTheme) setTheme(savedTheme); else setTheme('light');
 
+  // --- CLOSE MENUS ON OUTSIDE CLICK / ESCAPE ---
+  function closeNavMenu() {
+    navMenu.classList.remove('show');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.querySelector('i').classList.replace('fa-xmark', 'fa-bars');
+  }
+  function closeThemeMenu() {
+    themeMenu.classList.remove('show');
+    themeBtn.setAttribute('aria-expanded', 'false');
+  }
+  document.addEventListener('click', (e) => {
+    if(navMenu.classList.contains('show') && !navMenu.contains(e.target) && !menuBtn.contains(e.target)) closeNavMenu();
+    if(themeMenu.classList.contains('show') && !themeMenu.contains(e.target) && !themeBtn.contains(e.target)) closeThemeMenu();
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') { closeNavMenu(); closeThemeMenu(); }
+  });
+
   // --- LIVE CVE TICKER ---
   const mockCVEs = [
     "CVE-2024-3094 (Critical) - glibc overflow", "CVE-2024-21626 (High) - runc breakout", 
@@ -717,13 +739,17 @@
     const label = isFallback ? '[ARCHIVE]' : '[ALERT]';
     return cves.map(c => `<span class="cve-item"><span>${label}</span> ${c}</span>`).join('&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;');
   }
-  fetch('https://api.rss2json.com/v1/api.json?rss_url=https://cvefeed.io/rssfeed/latest.xml')
+  const cveController = new AbortController();
+  const cveTimeout = setTimeout(() => cveController.abort(), 6000);
+  fetch('https://api.rss2json.com/v1/api.json?rss_url=https://cvefeed.io/rssfeed/latest.xml', { signal: cveController.signal })
     .then(r=>r.json()).then(d => {
+      clearTimeout(cveTimeout);
       if(d.items && d.items.length > 0) {
         let liveCves = d.items.slice(0, 8).map(i => i.title);
         document.getElementById('cveTicker').innerHTML = buildTicker(liveCves, false) + "&nbsp;&nbsp;|&nbsp;&nbsp;" + buildTicker(liveCves, false);
       } else throw "err";
     }).catch(() => {
+      clearTimeout(cveTimeout);
       document.getElementById('cveTicker').innerHTML = buildTicker(mockCVEs, true) + "&nbsp;&nbsp;|&nbsp;&nbsp;" + buildTicker(mockCVEs, true);
     });
 
@@ -742,6 +768,7 @@
   let matrixInterval;
   function startMatrix() {
     if(prefersReducedMotion) return;
+    if(matrixInterval) clearInterval(matrixInterval);
     matrixCanvas.style.display = 'block'; matrixCanvas.width = window.innerWidth; matrixCanvas.height = window.innerHeight;
     const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレゲゼデベペオォコソトノホモヨョロゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const alphabet = katakana.split(''); const fontSize = 16; const columns = matrixCanvas.width / fontSize;
@@ -758,6 +785,12 @@
     }, 30);
   }
   function stopMatrix() { clearInterval(matrixInterval); matrixCanvas.style.display = 'none'; }
+  window.addEventListener('resize', () => {
+    if(matrixCanvas.style.display === 'block') {
+      matrixCanvas.width = window.innerWidth;
+      matrixCanvas.height = window.innerHeight;
+    }
+  });
 
   // Draggable Terminal
   const termWin = document.getElementById('draggableTerm');
@@ -903,6 +936,11 @@
         window.location.href = item.getAttribute('href');
       });
     });
+  });
+
+  // --- Placeholder Links (blog/cert cards without a real URL yet) ---
+  document.querySelectorAll('a[href="#"]').forEach(a => {
+    a.addEventListener('click', (e) => e.preventDefault());
   });
 
   // --- Dynamic Favicon ---
